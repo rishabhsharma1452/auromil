@@ -223,6 +223,102 @@ const procedures = [
   },
 ];
 
+const processSteps = [
+  {
+    title: "Send your medical information",
+    step: "Step 01",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+        <polyline points="10 9 9 9 8 9" />
+      </svg>
+    ),
+  },
+  {
+    title: "Receive treatment options & cost estimate",
+    step: "Step 02",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+        <line x1="12" y1="11" x2="12" y2="17" />
+        <line x1="9" y1="14" x2="15" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    title: "Confirm your treatment plan",
+    step: "Step 03",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <polyline points="9 11 12 14 22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </svg>
+    ),
+  },
+  {
+    title: "Travel for treatment",
+    step: "Step 04",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4.5 19.5 3c-1.5-1.5-3-1.5-4.5.5L11.5 7l-8.2-1.8L2 7l7.5 3.5L6 14l-3-1-1.5 1.5L5 17l1.5 3.5 1.5-1.5-1-3 3.5-3.5 3.5 7.5z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Receive recovery support guidance",
+    step: "Step 05",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+    ),
+  },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
@@ -420,49 +516,43 @@ export default function Home() {
       </section>
 
       {/* PROCESS */}
-
-      <section
-        id="process"
-        className="py-24 bg-slate-900 text-white"
-      >
-
-        <div className="max-w-6xl mx-auto px-6">
-
-          <h2 className="text-4xl font-bold text-center mb-20">
-            How It Works
-          </h2>
-
-          <div className="grid md:grid-cols-4 gap-8">
-
-            {[
-              "Share your medical reports",
-              "Receive hospital recommendations",
-              "Plan your medical travel",
-              "Begin your treatment journey",
-            ].map((item, i) => (
-
-              <div key={i} className="text-center">
-
-                <div className="w-16 h-16 mx-auto rounded-full bg-blue-700 flex items-center justify-center text-xl font-bold mb-6">
-
-                  {i + 1}
-
-                </div>
-
-                <p className="text-slate-300">{item}</p>
-
-              </div>
-
-            ))}
-
+      <section id="process" className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
+              Our Process
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
+              How It Works
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              We make your medical travel simple and stress-free. Follow these steps to begin your journey.
+            </p>
           </div>
 
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {processSteps.map((step, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition duration-300"
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-900 mb-6 border border-blue-100/50">
+                  {step.icon}
+                </div>
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
+                  {step.step}
+                </span>
+                <h3 className="text-base font-bold text-slate-900 leading-snug">
+                  {step.title}
+                </h3>
+              </div>
+            ))}
+          </div>
         </div>
-
       </section>
 
       {/* PROCEDURES */}
-      <section id="procedures" className="py-24 bg-slate-50">
+      <section id="procedures" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
@@ -511,7 +601,7 @@ export default function Home() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section id="why-choose-us" className="py-24">
+      <section id="why-choose-us" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             
