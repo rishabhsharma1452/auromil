@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
@@ -7,9 +9,15 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-100 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
 
-          <h1 className="text-2xl font-bold tracking-wider text-slate-900">
-            AUROMIL
-          </h1>
+          <a href="#" aria-label="Auromil home" className="block">
+            <Image
+              src="/auromil-logo.svg"
+              alt="Auromil"
+              width={762}
+              height={80}
+              className="h-auto w-56 sm:w-[21.5rem]"
+            />
+          </a>
 
           <div className="hidden md:flex gap-8 text-sm">
             <a href="#about" className="hover:text-blue-700">About</a>
@@ -72,6 +80,7 @@ export default function Home() {
 
             <img
               src="https://images.unsplash.com/photo-1576091160550-2173dba999ef"
+              alt="Doctor consulting with a patient"
               className="rounded-3xl shadow-2xl"
             />
 
@@ -227,14 +236,14 @@ export default function Home() {
 
           <p className="text-slate-600 mt-6 text-lg">
 
-            We'd be happy to answer your questions and help you explore
+            We&apos;d be happy to answer your questions and help you explore
             treatment options in India.
 
           </p>
 
           <div className="mt-12 space-y-4 text-lg">
 
-            <p>hello@auromil.com</p>
+            <p>contact@auromil.com</p>
 
             <p>+91 9310790689</p>
 
@@ -243,7 +252,7 @@ export default function Home() {
           </div>
 
           <a
-            href="mailto:hello@auromil.com"
+            href="mailto:contact@auromil.com"
             className="inline-block mt-10 px-8 py-4 rounded-full bg-slate-900 text-white hover:bg-blue-700 transition"
           >
             Contact Us
@@ -259,9 +268,13 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
 
-          <p className="font-semibold">
-            AUROMIL
-          </p>
+          <Image
+            src="/auromil-logo.svg"
+            alt="Auromil"
+            width={762}
+            height={80}
+            className="h-auto w-48 sm:w-64"
+          />
 
           <p className="text-slate-500">
             © 2026 AUROMIL. All rights reserved.
