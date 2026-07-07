@@ -429,86 +429,171 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-
       <section id="about" className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            
+            {/* Left Column: Context & Copy */}
+            <div className="lg:col-span-5 flex flex-col items-start text-left">
+              <span className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
+                About Auromil
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-6">
+                Healthcare, Simplified.
+              </h2>
+              <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                At AUROMIL, we bridge the gap between world-class Indian healthcare and international patients. We help patients discover trusted medical options, coordinate expert consultations, and guide them carefully from arrival to safe recovery.
+              </p>
+              <p className="text-slate-500 leading-relaxed text-sm">
+                Our mission is to make high-quality healthcare accessible, clear, and reassuring, ensuring you are never alone on your healing journey.
+              </p>
+            </div>
 
-        <div className="max-w-5xl mx-auto px-6 text-center">
+            {/* Right Column: Key Pillars */}
+            <div className="lg:col-span-7 grid gap-6 w-full">
+              {[
+                {
+                  title: "Accredited Hospital Network",
+                  desc: "We connect you directly with JCI and NABH accredited hospitals in India, ensuring the highest standards of safety and clinical excellence.",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <line x1="9" y1="9" x2="15" y2="9" />
+                      <line x1="12" y1="9" x2="12" y2="15" />
+                    </svg>
+                  )
+                },
+                {
+                  title: "Personalized Support",
+                  desc: "Receive dedicated guidance from an assigned case manager who handles your records, scheduling, and updates from initial query to final check-up.",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  )
+                },
+                {
+                  title: "End-to-End Travel Care",
+                  desc: "We coordinate travel logistics including priority medical visa invitations, airport pick-up/drop-off, language interpretation, and local stays.",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                  )
+                }
+              ].map((pillar, idx) => (
+                <div
+                  key={idx}
+                  className="flex gap-6 p-6 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-lg transition duration-300 items-start text-left"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-900 border border-blue-100/50">
+                    {pillar.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-1">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-slate-600 leading-relaxed text-sm">
+                      {pillar.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          <h2 className="text-4xl font-bold mb-8">
-
-            Healthcare, Simplified.
-
-          </h2>
-
-          <p className="text-lg leading-9 text-slate-600">
-
-            At AUROMIL, we assist patients seeking medical treatment in India
-            by helping them identify suitable hospitals, coordinate medical
-            consultations, arrange travel logistics, and provide personalized
-            support throughout their healthcare journey.
-
-          </p>
-
+          </div>
         </div>
-
       </section>
 
       {/* SERVICES */}
 
       <section id="services" className="py-24">
-
         <div className="max-w-7xl mx-auto px-6">
-
-          <h2 className="text-4xl font-bold text-center mb-16">
-            Our Services
-          </h2>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
+              What We Offer
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
+              Our Services
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Comprehensive assistance tailored to international patients, ensuring high-quality, seamless, and comfortable medical journeys.
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-
-            <div className="rounded-3xl border p-8 hover:shadow-xl transition">
-
-              <h3 className="text-2xl font-semibold mb-4">
-                Hospital Matching
-              </h3>
-
-              <p className="text-slate-600 leading-8">
-
-                Helping patients connect with hospitals and specialists suited
-                to their treatment requirements.
-
-              </p>
-
-            </div>
-
-            <div className="rounded-3xl border p-8 hover:shadow-xl transition">
-
-              <h3 className="text-2xl font-semibold mb-4">
-                Medical Travel
-              </h3>
-
-              <p className="text-slate-600 leading-8">
-
-                Assistance with travel planning, accommodation, and treatment
-                scheduling.
-
-              </p>
-
-            </div>
-
-            <div className="rounded-3xl border p-8 hover:shadow-xl transition">
-
-              <h3 className="text-2xl font-semibold mb-4">
-                Care Coordination
-              </h3>
-
-              <p className="text-slate-600 leading-8">
-
-                Personalized guidance before, during, and after treatment.
-
-              </p>
-
-            </div>
-
+            {[
+              {
+                title: "Hospital Matching",
+                desc: "Connect with accredited hospitals and top specialists suited to your specific medical needs. We assist with report reviews, doctor opinions, and detailed treatment options.",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="9" cy="9" r="2" />
+                    <circle cx="15" cy="15" r="2" />
+                    <line x1="17" y1="7" x2="7" y2="17" />
+                  </svg>
+                )
+              },
+              {
+                title: "Medical Travel",
+                desc: "Seamless travel planning including priority medical visa invitations, flight bookings, accommodation arrangements, and airport transfers for patients and companions.",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                    <circle cx="12" cy="12" r="10" />
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                  </svg>
+                )
+              },
+              {
+                title: "Care Coordination",
+                desc: "Dedicated on-ground support, local medical coordinator assistance, language translation, post-operative recovery support, and follow-up care scheduling.",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="M9 11l2 2 4-4" />
+                  </svg>
+                )
+              }
+            ].map((service, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col justify-between p-8 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-xl hover:-translate-y-1 transition duration-300"
+              >
+                <div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-900 border border-blue-100/50 mb-6">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed text-sm">
+                    {service.desc}
+                  </p>
+                </div>
+                <div className="mt-8 pt-6 border-t border-slate-50">
+                  <Link
+                    href="/coming-soon"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:text-blue-900 group/link transition"
+                  >
+                    Learn more
+                    <svg
+                      className="w-4 h-4 transform group-hover/link:translate-x-1 transition"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
 
         </div>
