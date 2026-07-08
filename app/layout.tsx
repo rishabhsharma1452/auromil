@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AUROMIL | Premium Medical Travel & Care Facilitation to India",
+  title: "AUROMIL | Premium Medical Travel & Care Coordination to India",
   description:
-    "AUROMIL connects international patients with leading JCI & NABH accredited hospitals in India. Experience personalized clinical matching, dedicated medical visa support, and end-to-end travel coordination.",
+    "AUROMIL coordinates medical travel for international patients seeking care in India. Compare options across JCI & NABH accredited hospitals, receive dedicated visa invitation support, and experience end-to-end on-ground care.",
   keywords: [
-    "medical tourism India",
-    "medical travel facilitation",
+    "medical travel India",
+    "medical travel coordination",
     "healthcare travel India",
     "accredited hospitals India",
     "patient travel coordinator",
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "AUROMIL" }],
   openGraph: {
-    title: "AUROMIL | Premium Medical Travel & Care Facilitation to India",
+    title: "AUROMIL | Premium Medical Travel & Care Coordination to India",
     description:
-      "Connect with leading accredited medical institutions in India. Get personalized specialist matching, visa assistance, and empathetic on-ground support.",
+      "Connect with leading accredited medical institutions in India. Get personalized hospital matching, visa assistance, and empathetic on-ground support.",
     url: "https://auromil.com",
     siteName: "AUROMIL",
     locale: "en_US",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AUROMIL | Premium Medical Travel Facilitation",
+    title: "AUROMIL | Premium Medical Travel Coordination",
     description:
       "Simplifying medical travel to India. Expert hospital matching, travel coordination, and personalized care.",
   },

@@ -75,7 +75,7 @@ const procedures = [
   {
     title: "Knee Replacement",
     category: "Orthopaedic",
-    desc: "Restoring mobility with advanced minimally invasive joint reconstruction.",
+    desc: "Relieve chronic joint pain and restore active mobility through advanced reconstruction.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -97,7 +97,7 @@ const procedures = [
   {
     title: "Hip Replacement",
     category: "Orthopaedic",
-    desc: "Highly precise joint arthroplasty at leading specialized orthopaedic centers.",
+    desc: "Regain natural joint function and comfort with highly precise arthroplasty.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -116,7 +116,7 @@ const procedures = [
   {
     title: "Spinal Procedures",
     category: "Orthopaedic",
-    desc: "Corrective therapies and decompression surgeries led by neurosurgical specialists.",
+    desc: "Relieve nerve pressure and restore stability through specialized neurosurgical care.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -137,7 +137,7 @@ const procedures = [
   {
     title: "IVF Fertility Treatment",
     category: "Fertility",
-    desc: "Advanced reproductive technologies and empathetic, personalized fertility care.",
+    desc: "Compassionate, advanced reproductive technologies tailored to your family journey.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -157,7 +157,7 @@ const procedures = [
   {
     title: "Cosmetic Surgery",
     category: "Aesthetic",
-    desc: "Reconstructive and aesthetic procedures performed by board-certified surgeons.",
+    desc: "Reconstructive and aesthetic care led by board-certified plastic surgeons.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -177,7 +177,7 @@ const procedures = [
   {
     title: "Dental Implants",
     category: "Dental",
-    desc: "Full-mouth restorations and advanced implantology with medical-grade materials.",
+    desc: "Restore dental function and confidence with durable, medical-grade materials.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -195,7 +195,7 @@ const procedures = [
   {
     title: "Cataract Surgery",
     category: "Ophthalmology",
-    desc: "Rapid recovery micro-incision lens replacement using state-of-the-art diagnostics.",
+    desc: "Clear your vision and enjoy rapid recovery with advanced micro-incision lens replacement.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -214,7 +214,7 @@ const procedures = [
   {
     title: "Weight Loss Surgery",
     category: "Bariatric",
-    desc: "Metabolic and bariatric procedures designed for long-term health and wellness.",
+    desc: "Improve long-term health and vitality through specialized bariatric options.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -233,7 +233,7 @@ const procedures = [
 
 const processSteps = [
   {
-    title: "Submit Medical Records",
+    title: "Share Medical Records",
     step: "Step 01",
     icon: (
       <svg
@@ -254,7 +254,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Receive Specialist Opinions",
+    title: "Receive Treatment Plans",
     step: "Step 02",
     icon: (
       <svg
@@ -274,7 +274,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Confirm Your Treatment Path",
+    title: "Select Your Hospital",
     step: "Step 03",
     icon: (
       <svg
@@ -292,7 +292,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Coordinated Arrival in India",
+    title: "Travel & Arrival",
     step: "Step 04",
     icon: (
       <svg
@@ -309,7 +309,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Treatment & Recovery Support",
+    title: "Treatment & Recovery",
     step: "Step 05",
     icon: (
       <svg
@@ -385,7 +385,7 @@ export default function Home() {
           <div>
 
             <p className="uppercase tracking-[0.3em] text-blue-700 text-sm font-semibold mb-5">
-              Medical Travel Facilitation • India
+              Medical Travel Coordination • India
             </p>
 
             <h1 className="text-5xl lg:text-7.5xl font-extrabold leading-tight tracking-tight">
@@ -397,9 +397,9 @@ export default function Home() {
 
             <p className="mt-8 text-lg text-slate-600 leading-relaxed max-w-xl">
 
-              AUROMIL simplifies medical travel for international patients seeking care in India. 
-              We coordinate your entire journey—from matching you with top accredited hospital specialists 
-              to managing travel logistics and medical visas—ensuring you are never alone on the path to healing.
+              AUROMIL makes it simple for international patients to access medical care in India. 
+              We coordinate your entire journey—from finding the right accredited hospital and specialist, 
+              to managing travel details and medical visas. You focus on healing; we handle the details.
 
             </p>
 
@@ -413,10 +413,10 @@ export default function Home() {
               </a>
 
               <a
-                href="#services"
+                href="#procedures"
                 className="px-8 py-4 rounded-full border border-slate-300 hover:border-blue-700 hover:text-blue-700 transition font-semibold"
               >
-                Explore Our Services
+                View Procedures
               </a>
 
             </div>
@@ -448,13 +448,13 @@ export default function Home() {
                 About Auromil
               </span>
               <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-6">
-                Bespoke Guidance.<br/>Complete Transparency.
+                Personal Guidance.<br/>Complete Transparency.
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                Seeking medical treatment abroad is a major milestone. At AUROMIL, we act as your trusted, dedicated partner on the ground in India, bridging the gap between world-class hospitals and international patients.
+                Traveling for medical care is a deeply personal decision. At AUROMIL, we act as your trusted coordinator on the ground in India, connecting you directly with world-class hospitals.
               </p>
               <p className="text-slate-500 leading-relaxed text-sm">
-                Rather than navigating a foreign healthcare system alone, we provide the personalized attention and logistical coordination you need. Our approach is entirely patient-first: we prioritize your safety, respect your preferences, and maintain absolute clarity throughout your healing journey.
+                Rather than navigating a foreign healthcare system alone, you receive the direct coordination, clear translation, and logistical support you need. We work solely for you—prioritizing your comfort, representing your preferences, and maintaining absolute honesty at every step of your journey.
               </p>
             </div>
 
@@ -462,8 +462,8 @@ export default function Home() {
             <div className="lg:col-span-7 grid gap-6 w-full">
               {[
                 {
-                  title: "Accredited Specialist Matching",
-                  desc: "We help you identify and compare JCI and NABH accredited hospitals in India, ensuring your files are reviewed by leading clinical specialists who fit your exact diagnosis.",
+                  title: "Hospital Matching",
+                  desc: "We help you compare options across JCI and NABH accredited hospitals in India, ensuring your medical records are reviewed by leading specialists for your specific condition.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -473,8 +473,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Singular Point of Contact",
-                  desc: "Avoid getting passed between different hospital desks. You receive dedicated coordination, handling your records, scheduling, and updates from day one.",
+                  title: "Dedicated Coordination",
+                  desc: "Avoid the stress of dealing with multiple hospital departments. You have a single coordinator managing your updates, scheduling, and consultations from start to finish.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -485,8 +485,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Logistical Care Coordination",
-                  desc: "We coordinate key travel logistics including official medical visa invitation letters, local accommodation setups for you and your companion, and airport transfers.",
+                  title: "Travel & Visa Coordination",
+                  desc: "We coordinate the details that matter—facilitating official medical visa invitation letters from the hospital, recommending local accommodation, and arranging airport transfers.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -527,10 +527,10 @@ export default function Home() {
               Our Services
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
-              Clinical & Logistical Support
+              Medical Travel & Care Coordination
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Professional, high-touch assistance tailored to international patients, simplifying every clinical and travel milestone.
+              Clear, reliable coordination designed to take the stress out of seeking treatment abroad.
             </p>
           </div>
 
@@ -538,7 +538,7 @@ export default function Home() {
             {[
               {
                 title: "Hospital Matching",
-                desc: "Identify the optimal care path. We coordinate detailed clinical reviews of your medical history, secure consultation reports from top accredited specialists, and help you analyze transparent treatment estimates.",
+                desc: "Compare options from leading medical institutions. We share your medical records with top accredited specialists, gather detailed treatment plans, and help you evaluate transparent cost outlines.",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -549,8 +549,8 @@ export default function Home() {
                 )
               },
               {
-                title: "Travel Logistics",
-                desc: "Focus entirely on healing. We facilitate your official medical visa invitation letters, recommend vetted local accommodation options for you and your companion, and coordinate seamless airport transfers.",
+                title: "Travel & Visa Coordination",
+                desc: "Focus on your health while we take care of the logistics. We manage hospital visa invitation letters, recommend vetted local accommodation options for you and your companion, and coordinate your airport transfers.",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <circle cx="12" cy="12" r="10" />
@@ -559,8 +559,8 @@ export default function Home() {
                 )
               },
               {
-                title: "Care Coordination",
-                desc: "Experience on-the-ground support. We assign a dedicated local coordinator during your hospital stay, facilitate communication with clinical teams, and organize follow-up consultations.",
+                title: "On-Ground Support",
+                desc: "Receive personal care from the moment you arrive. We provide local coordination during your hospital stay, arrange language translation if needed, and schedule remote follow-up care when you return home.",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -617,10 +617,10 @@ export default function Home() {
               Our Process
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
-              Your Journey, Coordinated
+              How we coordinate your journey
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              We make medical travel simple and reassuring. Follow these five milestones to begin your treatment.
+              We guide you through each milestone, keeping the process simple, clear, and reassuring.
             </p>
           </div>
 
@@ -708,10 +708,10 @@ export default function Home() {
                 Why Auromil
               </p>
               <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-6">
-                Why Coordinate Through Us?
+                Why use a coordinator instead of contacting hospitals directly?
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-8">
-                While you can contact foreign hospitals directly, managing medical reports, visa invitation letters, translation, local lodging, and transport on your own is complex. We handle the logistical burden, acting as your dedicated advocate on the ground.
+                While you can contact foreign hospitals directly, managing medical records, visa invitations, local lodging, and transport on your own is overwhelming. We handle the complexity and act as your independent advocate on the ground.
               </p>
               <a
                 href="#contact"
@@ -737,8 +737,8 @@ export default function Home() {
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
               {[
                 {
-                  title: "Independent Comparisons",
-                  desc: "Hospitals will only recommend their own services. We coordinate clinical opinions and cost estimates from multiple accredited institutions to help you compare options objectively.",
+                  title: "Unbiased Comparison",
+                  desc: "Hospitals will only recommend their own services. We collect treatment options and cost outlines from multiple accredited hospitals, helping you make an objective choice.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -748,8 +748,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Singular Liaison",
-                  desc: "Skip the administrative maze. You communicate with one dedicated coordinator who gathers clinical inputs, schedules virtual panels, and updates you daily.",
+                  title: "One Dedicated Contact",
+                  desc: "Avoid being passed between various administrative offices. Your coordinator manages all communication, schedules consultations, and updates you daily.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -760,8 +760,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Travel & Visa Coordination",
-                  desc: "We interface directly with hospital legal desks to expedite your official Medical Visa Invitation Letter, simplifying your visa application.",
+                  title: "Visa Invitation Support",
+                  desc: "We work directly with hospital registration desks to expedite the official Medical Visa Invitation Letter required for your visa application.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <circle cx="12" cy="12" r="10" />
@@ -770,8 +770,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Local Accommodation",
-                  desc: "We coordinate comfortable guest houses or hotels near your treatment center, ensuring a safe and quiet space for you and your companion.",
+                  title: "Lodging & Transfers",
+                  desc: "We recommend and arrange comfortable local lodging near your hospital, ensuring a quiet, convenient space for you and your companion.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -780,8 +780,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Empathetic Advocacy",
-                  desc: "We work directly for you, not the hospital network. Our sole priority is ensuring clear communication, transparent billing, and clinical care safety.",
+                  title: "Independent Advocacy",
+                  desc: "We work for you, not the hospital network. Our sole priority is ensuring clear communication, transparent pricing, and patient comfort.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -790,7 +790,7 @@ export default function Home() {
                 },
                 {
                   title: "Transparent Cost Outlines",
-                  desc: "We request detailed treatment package breakdowns beforehand, highlighting exactly what is covered and helping you avoid hidden fees.",
+                  desc: "We secure comprehensive package outlines beforehand, explaining exactly what is included so you can plan with financial peace of mind.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -827,13 +827,13 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
-              Frequently Asked Questions
+              FAQ
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
-              Support & Transparency
+              Common Questions
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Clear answers to help you navigate your medical journey with confidence.
+              Straightforward answers to help you plan your journey with confidence.
             </p>
           </div>
 
@@ -841,7 +841,7 @@ export default function Home() {
             {[
               {
                 q: "How does AUROMIL work?",
-                a: "We act as your dedicated liaison with leading medical institutions in India. Once you share your medical files, we coordinate with specialists across accredited hospitals to secure clinical opinions and treatment estimates. We then assist with visa facilitation, travel planning, and local coordination to ensure a seamless, supportive experience."
+                a: "We act as your dedicated coordinator with leading medical institutions in India. Once you share your medical records, we coordinate with specialists across accredited hospitals to secure treatment plans and cost estimates. We then assist with visa invitation letters, local lodging options, and airport transfers to ensure a seamless, supportive experience."
               },
               {
                 q: "Does AUROMIL charge patients?",
@@ -849,23 +849,23 @@ export default function Home() {
               },
               {
                 q: "Which hospitals can I choose from?",
-                a: "We connect you with premier JCI (Joint Commission International) and NABH (National Accreditation Board for Hospitals) accredited hospitals in India. As a dedicated facilitator, we work to introduce you directly to the medical departments and senior specialists best suited to your specific diagnosis and preferences."
+                a: "We connect you with premier JCI (Joint Commission International) and NABH (National Accreditation Board for Hospitals) accredited hospitals in India. As a dedicated coordinator, we introduce you directly to the medical departments and senior specialists best suited to your specific diagnosis and preferences."
               },
               {
-                q: "How do I send medical reports?",
-                a: "You can securely email your diagnostic files to contact@auromil.com or share them directly with us via WhatsApp. All documents are handled with strict privacy protocols and are only shared with authorized medical consultants reviewing your case."
+                q: "How do I send medical records?",
+                a: "You can securely email your medical records to contact@auromil.com or share them directly with us via WhatsApp. All documents are handled with strict privacy protocols and are only shared with authorized medical consultants reviewing your case."
               },
               {
                 q: "Is my information confidential?",
-                a: "Absolutely. Patient confidentiality is our highest priority. We operate under strict data protection principles, ensuring your personal details, clinical history, and diagnostic records are stored securely and only shared with the consulting specialists reviewing your treatment plan."
+                a: "Absolutely. Patient confidentiality is our highest priority. We operate under strict data protection principles, ensuring your personal details, clinical history, and medical records are stored securely and only shared with the consulting specialists reviewing your treatment plan."
               },
               {
                 q: "How long does the process take?",
-                a: "Typically, we are able to secure detailed specialist opinions, treatment timelines, and comprehensive cost estimates within 48 to 72 hours of receiving your medical files and diagnostic reports."
+                a: "Typically, we are able to secure detailed treatment plans and comprehensive cost estimates within 48 to 72 hours of receiving your medical records."
               },
               {
                 q: "Can AUROMIL help with medical visas?",
-                a: "Yes. Once you select your treatment center and decide to proceed, we coordinate directly with the hospital's international patient division to issue an official Medical Visa Invitation Letter. We then guide you step-by-step through the application process."
+                a: "Yes. Once you select your hospital and decide to proceed, we coordinate directly with their international patient division to issue an official Medical Visa Invitation Letter. We then guide you step-by-step through the visa application process."
               }
             ].map((faq, i) => (
               <details
@@ -908,16 +908,55 @@ export default function Home() {
             <div className="relative z-10 grid lg:grid-cols-12 gap-12 items-center">
               
               {/* Left Column: Headline */}
-              <div className="lg:col-span-6 text-left">
-                <span className="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-300 border border-blue-500/20 mb-6">
-                  Consultation
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight">
-                  Discuss Your Medical Needs
-                </h2>
-                <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
-                  We are here to answer your questions and coordinate your care. Contact us for a confidential, no-obligation discussion about your healthcare options in India.
-                </p>
+              <div className="lg:col-span-6 text-left flex flex-col justify-between h-full">
+                <div>
+                  <span className="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-300 border border-blue-500/20 mb-6">
+                    Consultation
+                  </span>
+                  <h2 className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight">
+                    Discuss Your Medical Needs
+                  </h2>
+                  <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
+                    We are here to answer your questions and coordinate your care. Contact us for a confidential, no-obligation discussion about your healthcare options in India.
+                  </p>
+                </div>
+                
+                {/* Visual Stepper Checklist */}
+                <div className="mt-12 border-t border-white/10 pt-8">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-blue-300 mb-6">
+                    Next Steps After You Contact Us
+                  </h3>
+                  <ul className="space-y-6 text-sm text-slate-300">
+                    <li className="flex items-start gap-4">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-xs font-bold text-blue-300 border border-blue-500/20">1</span>
+                      <div>
+                        <strong className="text-white block font-medium">Review Medical Records</strong>
+                        <span className="text-slate-400 text-xs mt-1 block">We securely receive and review your diagnostics.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-xs font-bold text-blue-300 border border-blue-500/20">2</span>
+                      <div>
+                        <strong className="text-white block font-medium">Gather Specialist Options</strong>
+                        <span className="text-slate-400 text-xs mt-1 block">We consult leading accredited hospitals to collect initial opinions.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-xs font-bold text-blue-300 border border-blue-500/20">3</span>
+                      <div>
+                        <strong className="text-white block font-medium">Compare Cost & Care</strong>
+                        <span className="text-slate-400 text-xs mt-1 block">We present transparent treatment plans and cost estimates.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-xs font-bold text-blue-300 border border-blue-500/20">4</span>
+                      <div>
+                        <strong className="text-white block font-medium">Coordinate Travel Details</strong>
+                        <span className="text-slate-400 text-xs mt-1 block">We assist with medical visa invitation letters, lodging, and transfers.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
               {/* Right Column: Details card */}
