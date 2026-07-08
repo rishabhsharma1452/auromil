@@ -75,6 +75,7 @@ const procedures = [
   {
     title: "Knee Replacement",
     category: "Orthopaedic",
+    desc: "Restoring mobility with advanced minimally invasive joint reconstruction.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -96,6 +97,7 @@ const procedures = [
   {
     title: "Hip Replacement",
     category: "Orthopaedic",
+    desc: "Highly precise joint arthroplasty at leading specialized orthopaedic centers.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -114,6 +116,7 @@ const procedures = [
   {
     title: "Spinal Procedures",
     category: "Orthopaedic",
+    desc: "Corrective therapies and decompression surgeries led by neurosurgical specialists.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -134,6 +137,7 @@ const procedures = [
   {
     title: "IVF Fertility Treatment",
     category: "Fertility",
+    desc: "Advanced reproductive technologies and empathetic, personalized fertility care.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -153,6 +157,7 @@ const procedures = [
   {
     title: "Cosmetic Surgery",
     category: "Aesthetic",
+    desc: "Reconstructive and aesthetic procedures performed by board-certified surgeons.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -172,6 +177,7 @@ const procedures = [
   {
     title: "Dental Implants",
     category: "Dental",
+    desc: "Full-mouth restorations and advanced implantology with medical-grade materials.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -189,6 +195,7 @@ const procedures = [
   {
     title: "Cataract Surgery",
     category: "Ophthalmology",
+    desc: "Rapid recovery micro-incision lens replacement using state-of-the-art diagnostics.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -207,6 +214,7 @@ const procedures = [
   {
     title: "Weight Loss Surgery",
     category: "Bariatric",
+    desc: "Metabolic and bariatric procedures designed for long-term health and wellness.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -225,7 +233,7 @@ const procedures = [
 
 const processSteps = [
   {
-    title: "Send your medical information",
+    title: "Submit Medical Records",
     step: "Step 01",
     icon: (
       <svg
@@ -246,7 +254,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Receive treatment options & cost estimate",
+    title: "Receive Specialist Opinions",
     step: "Step 02",
     icon: (
       <svg
@@ -266,7 +274,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Confirm your treatment plan",
+    title: "Confirm Your Treatment Path",
     step: "Step 03",
     icon: (
       <svg
@@ -284,7 +292,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Travel for treatment",
+    title: "Coordinated Arrival in India",
     step: "Step 04",
     icon: (
       <svg
@@ -301,7 +309,7 @@ const processSteps = [
     ),
   },
   {
-    title: "Receive recovery support guidance",
+    title: "Treatment & Recovery Support",
     step: "Step 05",
     icon: (
       <svg
@@ -338,11 +346,12 @@ export default function Home() {
             />
           </Link>
 
-          <div className="hidden md:flex gap-8 text-sm">
-            <a href="#about" className="hover:text-blue-700">About</a>
-            <a href="#services" className="hover:text-blue-700">Services</a>
-            <a href="#process" className="hover:text-blue-700">Process</a>
-            <a href="#contact" className="hover:text-blue-700">Contact</a>
+          <div className="hidden md:flex gap-8 text-sm font-medium">
+            <a href="#about" className="hover:text-blue-700 transition">About</a>
+            <a href="#services" className="hover:text-blue-700 transition">Services</a>
+            <a href="#process" className="hover:text-blue-700 transition">Process</a>
+            <a href="#faq" className="hover:text-blue-700 transition">FAQ</a>
+            <a href="#contact" className="hover:text-blue-700 transition">Contact</a>
           </div>
 
         </div>
@@ -369,28 +378,28 @@ export default function Home() {
 
       {/* HERO */}
 
-      <section className="pt-40 pb-28">
+      <section className="pt-48 pb-28">
 
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
 
           <div>
 
-            <p className="uppercase tracking-[0.3em] text-blue-700 text-sm mb-5">
-              Medical Tourism • India
+            <p className="uppercase tracking-[0.3em] text-blue-700 text-sm font-semibold mb-5">
+              Medical Travel Facilitation • India
             </p>
 
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+            <h1 className="text-5xl lg:text-7.5xl font-extrabold leading-tight tracking-tight">
 
               Guiding Healing Journeys
-              <span className="text-blue-700"> Beyond Borders.</span>
+              <span className="text-blue-700 block sm:inline"> Beyond Borders.</span>
 
             </h1>
 
-            <p className="mt-8 text-lg text-slate-600 leading-8">
+            <p className="mt-8 text-lg text-slate-600 leading-relaxed max-w-xl">
 
-              AUROMIL helps international patients connect with trusted
-              hospitals and healthcare professionals across India while
-              providing seamless guidance throughout the treatment journey.
+              AUROMIL simplifies medical travel for international patients seeking care in India. 
+              We coordinate your entire journey—from matching you with top accredited hospital specialists 
+              to managing travel logistics and medical visas—ensuring you are never alone on the path to healing.
 
             </p>
 
@@ -398,28 +407,28 @@ export default function Home() {
 
               <a
                 href="#contact"
-                className="px-8 py-4 rounded-full bg-slate-900 text-white hover:bg-blue-700 transition"
+                className="px-8 py-4 rounded-full bg-slate-900 text-white hover:bg-blue-700 transition font-semibold shadow-lg shadow-slate-900/10 hover:shadow-blue-700/25"
               >
-                Get in Touch
+                Request a Free Consultation
               </a>
 
               <a
                 href="#services"
-                className="px-8 py-4 rounded-full border border-slate-300 hover:border-blue-700 hover:text-blue-700 transition"
+                className="px-8 py-4 rounded-full border border-slate-300 hover:border-blue-700 hover:text-blue-700 transition font-semibold"
               >
-                Our Services
+                Explore Our Services
               </a>
 
             </div>
 
           </div>
 
-          <div>
-
+          <div className="relative">
+            <div className="absolute inset-0 bg-blue-600/5 rounded-3xl -rotate-2 transform scale-102" />
             <img
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef"
+              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800"
               alt="Doctor consulting with a patient"
-              className="rounded-3xl shadow-2xl"
+              className="relative rounded-3xl shadow-2xl object-cover w-full h-[450px]"
             />
 
           </div>
@@ -435,17 +444,17 @@ export default function Home() {
             
             {/* Left Column: Context & Copy */}
             <div className="lg:col-span-5 flex flex-col items-start text-left">
-              <span className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
+              <span className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
                 About Auromil
               </span>
               <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-6">
-                Healthcare, Simplified.
+                Bespoke Guidance.<br/>Complete Transparency.
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                At AUROMIL, we bridge the gap between world-class Indian healthcare and international patients. We help patients discover trusted medical options, coordinate expert consultations, and guide them carefully from arrival to safe recovery.
+                Seeking medical treatment abroad is a major milestone. At AUROMIL, we act as your trusted, dedicated partner on the ground in India, bridging the gap between world-class hospitals and international patients.
               </p>
               <p className="text-slate-500 leading-relaxed text-sm">
-                Our mission is to make high-quality healthcare accessible, clear, and reassuring, ensuring you are never alone on your healing journey.
+                Rather than navigating a foreign healthcare system alone, we provide the personalized attention and logistical coordination you need. Our approach is entirely patient-first: we prioritize your safety, respect your preferences, and maintain absolute clarity throughout your healing journey.
               </p>
             </div>
 
@@ -453,8 +462,8 @@ export default function Home() {
             <div className="lg:col-span-7 grid gap-6 w-full">
               {[
                 {
-                  title: "Accredited Hospital Network",
-                  desc: "We connect you directly with JCI and NABH accredited hospitals in India, ensuring the highest standards of safety and clinical excellence.",
+                  title: "Accredited Specialist Matching",
+                  desc: "We help you identify and compare JCI and NABH accredited hospitals in India, ensuring your files are reviewed by leading clinical specialists who fit your exact diagnosis.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -464,8 +473,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Personalized Support",
-                  desc: "Receive dedicated guidance from an assigned case manager who handles your records, scheduling, and updates from initial query to final check-up.",
+                  title: "Singular Point of Contact",
+                  desc: "Avoid getting passed between different hospital desks. You receive dedicated coordination, handling your records, scheduling, and updates from day one.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -476,8 +485,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "End-to-End Travel Care",
-                  desc: "We coordinate travel logistics including priority medical visa invitations, airport pick-up/drop-off, language interpretation, and local stays.",
+                  title: "Logistical Care Coordination",
+                  desc: "We coordinate key travel logistics including official medical visa invitation letters, local accommodation setups for you and your companion, and airport transfers.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -490,7 +499,7 @@ export default function Home() {
                   key={idx}
                   className="flex gap-6 p-6 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-lg transition duration-300 items-start text-left"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-900 border border-blue-100/50">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 border border-blue-100/50">
                     {pillar.icon}
                   </div>
                   <div>
@@ -514,14 +523,14 @@ export default function Home() {
       <section id="services" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
-              What We Offer
+            <p className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
+              Our Services
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
-              Our Services
+              Clinical & Logistical Support
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Comprehensive assistance tailored to international patients, ensuring high-quality, seamless, and comfortable medical journeys.
+              Professional, high-touch assistance tailored to international patients, simplifying every clinical and travel milestone.
             </p>
           </div>
 
@@ -529,7 +538,7 @@ export default function Home() {
             {[
               {
                 title: "Hospital Matching",
-                desc: "Connect with accredited hospitals and top specialists suited to your specific medical needs. We assist with report reviews, doctor opinions, and detailed treatment options.",
+                desc: "Identify the optimal care path. We coordinate detailed clinical reviews of your medical history, secure consultation reports from top accredited specialists, and help you analyze transparent treatment estimates.",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -540,8 +549,8 @@ export default function Home() {
                 )
               },
               {
-                title: "Medical Travel",
-                desc: "Seamless travel planning including priority medical visa invitations, flight bookings, accommodation arrangements, and airport transfers for patients and companions.",
+                title: "Travel Logistics",
+                desc: "Focus entirely on healing. We facilitate your official medical visa invitation letters, recommend vetted local accommodation options for you and your companion, and coordinate seamless airport transfers.",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <circle cx="12" cy="12" r="10" />
@@ -551,7 +560,7 @@ export default function Home() {
               },
               {
                 title: "Care Coordination",
-                desc: "Dedicated on-ground support, local medical coordinator assistance, language translation, post-operative recovery support, and follow-up care scheduling.",
+                desc: "Experience on-the-ground support. We assign a dedicated local coordinator during your hospital stay, facilitate communication with clinical teams, and organize follow-up consultations.",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -565,7 +574,7 @@ export default function Home() {
                 className="flex flex-col justify-between p-8 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-xl hover:-translate-y-1 transition duration-300"
               >
                 <div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-900 border border-blue-100/50 mb-6">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 border border-blue-100/50 mb-6">
                     {service.icon}
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">
@@ -604,14 +613,14 @@ export default function Home() {
       <section id="process" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
+            <p className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
               Our Process
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
-              How It Works
+              Your Journey, Coordinated
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              We make your medical travel simple and stress-free. Follow these steps to begin your journey.
+              We make medical travel simple and reassuring. Follow these five milestones to begin your treatment.
             </p>
           </div>
 
@@ -621,10 +630,10 @@ export default function Home() {
                 key={idx}
                 className="flex flex-col items-center text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition duration-300"
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-900 mb-6 border border-blue-100/50">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-700 mb-6 border border-blue-100/50">
                   {step.icon}
                 </div>
-                <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-700 mb-3">
                   {step.step}
                 </span>
                 <h3 className="text-base font-bold text-slate-900 leading-snug">
@@ -640,14 +649,14 @@ export default function Home() {
       <section id="procedures" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
+            <p className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
               Specialized Treatments
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
               Procedures We Coordinate
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Connecting you with world-class specialists and accredited hospitals across India for advanced medical treatments.
+              Connecting you with accredited medical teams and top specialists in India for advanced therapeutic treatments.
             </p>
           </div>
 
@@ -658,13 +667,16 @@ export default function Home() {
                 href="/coming-soon"
                 className="group flex flex-col items-center text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition duration-300"
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-900 group-hover:bg-blue-900 group-hover:text-white transition duration-300 mb-6">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-700 group-hover:bg-blue-700 group-hover:text-white transition duration-300 mb-6">
                   {proc.icon}
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {proc.title}
                 </h3>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-900 border border-blue-100">
+                <p className="text-slate-500 text-xs leading-relaxed mb-4 flex-grow">
+                  {proc.desc}
+                </p>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
                   {proc.category}
                 </span>
               </Link>
@@ -674,9 +686,9 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link
               href="/coming-soon"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white font-semibold transition duration-300 shadow-lg shadow-blue-900/5 hover:shadow-blue-900/10"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white font-semibold transition duration-300 shadow-lg shadow-blue-700/5 hover:shadow-blue-700/10"
             >
-              Request other procedure inquiry
+              Request Custom Procedure Inquiry
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -692,20 +704,20 @@ export default function Home() {
             
             {/* Left side info */}
             <div className="lg:col-span-5 flex flex-col items-start">
-              <p className="uppercase tracking-[0.2em] text-blue-900 text-sm font-semibold mb-3">
-                Why Choose Us
+              <p className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
+                Why Auromil
               </p>
               <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-6">
-                Professional Care You Can Trust
+                Why Coordinate Through Us?
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-8">
-                We understand how important it is to feel confident when seeking medical treatment abroad. Our experienced team guides, supports, and advocates for you throughout your entire healthcare journey.
+                While you can contact foreign hospitals directly, managing medical reports, visa invitation letters, translation, local lodging, and transport on your own is complex. We handle the logistical burden, acting as your dedicated advocate on the ground.
               </p>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-blue-900 text-white font-semibold hover:bg-blue-950 hover:shadow-lg hover:shadow-blue-900/20 hover:-translate-y-0.5 transition duration-300 mb-10"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-blue-700 text-white font-semibold hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-700/20 hover:-translate-y-0.5 transition duration-300 mb-10"
               >
-                Get Your Free Assessment
+                Discuss Your Treatment Plan
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -725,8 +737,8 @@ export default function Home() {
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
               {[
                 {
-                  title: "Experienced Specialists",
-                  desc: "Access to qualified medical professionals across multiple specialties worldwide.",
+                  title: "Independent Comparisons",
+                  desc: "Hospitals will only recommend their own services. We coordinate clinical opinions and cost estimates from multiple accredited institutions to help you compare options objectively.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -736,28 +748,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Reduced Waiting Times",
-                  desc: "Skip long queues and access treatment when you need it, not months later.",
-                  icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                  )
-                },
-                {
-                  title: "English-Speaking Team",
-                  desc: "Clear communication with English-speaking professionals throughout your journey.",
-                  icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20" />
-                    </svg>
-                  )
-                },
-                {
-                  title: "Personalised Coordination",
-                  desc: "Individual care plans tailored to your specific medical needs and circumstances.",
+                  title: "Singular Liaison",
+                  desc: "Skip the administrative maze. You communicate with one dedicated coordinator who gathers clinical inputs, schedules virtual panels, and updates you daily.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -768,8 +760,28 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Recovery Support",
-                  desc: "Guided post-treatment recovery support to help you heal safely and comfortably.",
+                  title: "Travel & Visa Coordination",
+                  desc: "We interface directly with hospital legal desks to expedite your official Medical Visa Invitation Letter, simplifying your visa application.",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20" />
+                    </svg>
+                  )
+                },
+                {
+                  title: "Local Accommodation",
+                  desc: "We coordinate comfortable guest houses or hotels near your treatment center, ensuring a safe and quiet space for you and your companion.",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                  )
+                },
+                {
+                  title: "Empathetic Advocacy",
+                  desc: "We work directly for you, not the hospital network. Our sole priority is ensuring clear communication, transparent billing, and clinical care safety.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -777,8 +789,8 @@ export default function Home() {
                   )
                 },
                 {
-                  title: "Transparent Pricing",
-                  desc: "Clear, upfront cost estimates with no hidden fees or unexpected surprises.",
+                  title: "Transparent Cost Outlines",
+                  desc: "We request detailed treatment package breakdowns beforehand, highlighting exactly what is covered and helping you avoid hidden fees.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
                       <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -793,7 +805,7 @@ export default function Home() {
                   key={i}
                   className="flex flex-col items-start p-8 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-xl hover:-translate-y-1 transition duration-300"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-900 mb-6">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 mb-6">
                     {card.icon}
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 mb-3">
@@ -806,6 +818,81 @@ export default function Home() {
               ))}
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="uppercase tracking-[0.2em] text-blue-700 text-sm font-semibold mb-3">
+              Frequently Asked Questions
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
+              Support & Transparency
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Clear answers to help you navigate your medical journey with confidence.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "How does AUROMIL work?",
+                a: "We act as your dedicated liaison with leading medical institutions in India. Once you share your medical files, we coordinate with specialists across accredited hospitals to secure clinical opinions and treatment estimates. We then assist with visa facilitation, travel planning, and local coordination to ensure a seamless, supportive experience."
+              },
+              {
+                q: "Does AUROMIL charge patients?",
+                a: "We provide transparent, tailored coordination services. Our consultation and matching service includes a clear breakdown of pricing based on your specific treatment and logistics requirements. All fees are discussed and agreed upon upfront before you begin your travel, with absolute transparency and no hidden costs."
+              },
+              {
+                q: "Which hospitals can I choose from?",
+                a: "We connect you with premier JCI (Joint Commission International) and NABH (National Accreditation Board for Hospitals) accredited hospitals in India. As a dedicated facilitator, we work to introduce you directly to the medical departments and senior specialists best suited to your specific diagnosis and preferences."
+              },
+              {
+                q: "How do I send medical reports?",
+                a: "You can securely email your diagnostic files to contact@auromil.com or share them directly with us via WhatsApp. All documents are handled with strict privacy protocols and are only shared with authorized medical consultants reviewing your case."
+              },
+              {
+                q: "Is my information confidential?",
+                a: "Absolutely. Patient confidentiality is our highest priority. We operate under strict data protection principles, ensuring your personal details, clinical history, and diagnostic records are stored securely and only shared with the consulting specialists reviewing your treatment plan."
+              },
+              {
+                q: "How long does the process take?",
+                a: "Typically, we are able to secure detailed specialist opinions, treatment timelines, and comprehensive cost estimates within 48 to 72 hours of receiving your medical files and diagnostic reports."
+              },
+              {
+                q: "Can AUROMIL help with medical visas?",
+                a: "Yes. Once you select your treatment center and decide to proceed, we coordinate directly with the hospital's international patient division to issue an official Medical Visa Invitation Letter. We then guide you step-by-step through the application process."
+              }
+            ].map((faq, i) => (
+              <details
+                key={i}
+                className="group border border-slate-100 rounded-3xl bg-slate-50/50 p-6 [&_summary::-webkit-details-marker]:hidden transition-all duration-300 open:bg-white open:border-blue-100 open:shadow-lg open:shadow-blue-900/5"
+              >
+                <summary className="flex justify-between items-center cursor-pointer list-none focus:outline-none select-none">
+                  <h3 className="text-lg font-bold text-slate-900 group-open:text-blue-700 transition duration-300 pr-4">
+                    {faq.q}
+                  </h3>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-slate-400 border border-slate-100 group-open:bg-blue-50 group-open:text-blue-700 group-open:border-blue-100 transition-all duration-300 shrink-0">
+                    <svg
+                      className="w-4 h-4 transform group-open:rotate-180 transition duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="mt-4 text-slate-600 leading-relaxed text-sm pr-6 border-t border-slate-100/50 pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>
@@ -823,13 +910,13 @@ export default function Home() {
               {/* Left Column: Headline */}
               <div className="lg:col-span-6 text-left">
                 <span className="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-300 border border-blue-500/20 mb-6">
-                  Get in Touch
+                  Consultation
                 </span>
                 <h2 className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight">
-                  Begin Your Healing Journey
+                  Discuss Your Medical Needs
                 </h2>
                 <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-xl">
-                  We are here to guide you. If you have questions about hospitals, travel, or treatments in India, reach out and we will assist you.
+                  We are here to answer your questions and coordinate your care. Contact us for a confidential, no-obligation discussion about your healthcare options in India.
                 </p>
               </div>
 
@@ -875,9 +962,9 @@ export default function Home() {
                 {/* Primary Button */}
                 <a
                   href="mailto:contact@auromil.com"
-                  className="w-full text-center py-4 rounded-2xl bg-blue-900 hover:bg-blue-950 text-white font-bold transition duration-300 shadow-lg shadow-blue-900/25 hover:shadow-blue-900/40"
+                  className="w-full text-center py-4 rounded-2xl bg-blue-700 hover:bg-blue-800 text-white font-bold transition duration-300 shadow-lg shadow-blue-700/25 hover:shadow-blue-700/40"
                 >
-                  Contact Us Now
+                  Email a Case Coordinator
                 </a>
 
               </div>
