@@ -1,50 +1,42 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ProcedureInquiryModal from "../components/ProcedureInquiryModal";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "AUROMIL | Premium Medical Travel & Care Coordination to India",
-  description:
-    "AUROMIL coordinates medical travel for international patients seeking care in India. Compare options across JCI & NABH accredited hospitals, receive dedicated visa invitation support, and experience end-to-end on-ground care.",
-  keywords: [
-    "medical travel India",
-    "medical travel coordination",
-    "healthcare travel India",
-    "accredited hospitals India",
-    "patient travel coordinator",
-    "knee replacement India",
-    "hip replacement India",
-    "IVF treatment India",
-    "affordable healthcare India",
-  ],
-  authors: [{ name: "AUROMIL" }],
+  title: "Auromil | Medical Travel & Care Coordination",
+  description: "Auromil coordinates care matching international patients with accredited hospital networks in India. We simplify medical visa invitation letters and travel files.",
+  alternates: {
+    canonical: "https://auromil.com",
+  },
   openGraph: {
-    title: "AUROMIL | Premium Medical Travel & Care Coordination to India",
-    description:
-      "Connect with leading accredited medical institutions in India. Get personalized hospital matching, visa assistance, and empathetic on-ground support.",
+    title: "Auromil | Medical Travel & Care Coordination",
+    description: "Auromil coordinates care matching international patients with accredited hospital networks in India. We simplify medical visa invitation letters and travel files.",
     url: "https://auromil.com",
-    siteName: "AUROMIL",
+    siteName: "Auromil",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AUROMIL | Premium Medical Travel Coordination",
-    description:
-      "Simplifying medical travel to India. Expert hospital matching, travel coordination, and personalized care.",
+    title: "Auromil | Medical Travel & Care Coordination",
+    description: "Auromil coordinates care matching international patients with accredited hospital networks in India. We simplify medical visa invitation letters and travel files.",
   },
-  icons: {
-    icon: "/icon.svg",
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -56,9 +48,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-white text-slate-900 font-sans">
+        <Navbar />
+        <div className="flex-grow">{children}</div>
+        <Footer />
+        <ProcedureInquiryModal />
+      </body>
     </html>
   );
 }

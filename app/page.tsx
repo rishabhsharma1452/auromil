@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import JsonLd, { getOrganizationSchema, getWebSiteSchema } from "../components/JsonLd";
 
 const socialLinks = [
   {
@@ -328,34 +329,12 @@ const processSteps = [
 ];
 
 export default function Home() {
+  const organizationSchema = getOrganizationSchema();
+  const webSiteSchema = getWebSiteSchema();
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
-
-      {/* NAVBAR */}
-
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-100 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-
-          <Link href="/" aria-label="Auromil home" className="block">
-            <Image
-              src="/auromil-logo.svg"
-              alt="Auromil"
-              width={762}
-              height={80}
-              className="h-auto w-56 sm:w-[21.5rem]"
-            />
-          </Link>
-
-          <div className="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#about" className="hover:text-blue-700 transition">About</a>
-            <a href="#services" className="hover:text-blue-700 transition">Services</a>
-            <a href="#process" className="hover:text-blue-700 transition">Process</a>
-            <a href="#faq" className="hover:text-blue-700 transition">FAQ</a>
-            <a href="#contact" className="hover:text-blue-700 transition">Contact</a>
-          </div>
-
-        </div>
-      </nav>
+      <JsonLd schema={[organizationSchema, webSiteSchema]} />
 
       <div
         className="fixed bottom-6 right-4 z-40 flex flex-col gap-3"
@@ -568,41 +547,49 @@ export default function Home() {
                   </svg>
                 )
               }
-            ].map((service, idx) => (
-              <div
-                key={idx}
-                className="flex flex-col justify-between p-8 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-xl hover:-translate-y-1 transition duration-300"
-              >
-                <div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 border border-blue-100/50 mb-6">
-                    {service.icon}
+            ].map((service, idx) => {
+              const hrefs = [
+                "/procedures",
+                "?inquire=visa-travel",
+                "?inquire=on-ground-support"
+              ];
+              const href = hrefs[idx] || "/procedures";
+              return (
+                <div
+                  key={idx}
+                  className="flex flex-col justify-between p-8 bg-white border border-slate-100 rounded-3xl hover:border-blue-100 hover:shadow-xl hover:-translate-y-1 transition duration-300"
+                >
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 border border-blue-100/50 mb-6">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-600 leading-relaxed text-sm">
+                      {service.desc}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">
-                    {service.desc}
-                  </p>
-                </div>
-                <div className="mt-8 pt-6 border-t border-slate-50">
-                  <Link
-                    href="/coming-soon"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:text-blue-900 group/link transition"
-                  >
-                    Learn more
-                    <svg
-                      className="w-4 h-4 transform group-hover/link:translate-x-1 transition"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      viewBox="0 0 24 24"
+                  <div className="mt-8 pt-6 border-t border-slate-50">
+                    <Link
+                      href={href}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:text-blue-900 group/link transition"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
+                      Learn more
+                      <svg
+                        className="w-4 h-4 transform group-hover/link:translate-x-1 transition"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
@@ -661,31 +648,45 @@ export default function Home() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {procedures.map((proc, idx) => (
-              <Link
-                key={idx}
-                href="/coming-soon"
-                className="group flex flex-col items-center text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition duration-300"
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-700 group-hover:bg-blue-700 group-hover:text-white transition duration-300 mb-6">
-                  {proc.icon}
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {proc.title}
-                </h3>
-                <p className="text-slate-500 text-xs leading-relaxed mb-4 flex-grow">
-                  {proc.desc}
-                </p>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
-                  {proc.category}
-                </span>
-              </Link>
-            ))}
+            {procedures.map((proc, idx) => {
+              const slugs = [
+                "knee-replacement",
+                "hip-replacement",
+                "spinal-procedures",
+                "ivf",
+                "cosmetic-surgery",
+                "dental-implants",
+                "cataract-surgery",
+                "weight-loss-surgery"
+              ];
+              const slug = slugs[idx] || "custom";
+              const href = `/procedures/${slug}`;
+              return (
+                <Link
+                  key={idx}
+                  href={href}
+                  className="group flex flex-col items-center text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition duration-300"
+                >
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50/70 text-blue-700 group-hover:bg-blue-700 group-hover:text-white transition duration-300 mb-6">
+                    {proc.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {proc.title}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed mb-4 flex-grow">
+                    {proc.desc}
+                  </p>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                    {proc.category}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
             <Link
-              href="/coming-soon"
+              href="?inquire=custom"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white font-semibold transition duration-300 shadow-lg shadow-blue-700/5 hover:shadow-blue-700/10"
             >
               Request Custom Procedure Inquiry
@@ -1013,23 +1014,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="border-t py-8">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
-          <Image
-            src="/auromil-logo.svg"
-            alt="Auromil"
-            width={762}
-            height={80}
-            className="h-auto w-48 sm:w-64"
-          />
-          <p className="text-slate-500">
-            © 2026 AUROMIL. All rights reserved.
-          </p>
-        </div>
-      </footer>
-
     </main>
   );
 }
