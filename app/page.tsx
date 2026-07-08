@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd, { getOrganizationSchema, getWebSiteSchema } from "../components/JsonLd";
+import ContactInquiryForm from "../components/ContactInquiryForm";
 
 const socialLinks = [
   {
@@ -999,13 +1000,8 @@ export default function Home() {
 
                 </div>
 
-                {/* Primary Button */}
-                <a
-                  href="mailto:contact@auromil.com"
-                  className="w-full text-center py-4 rounded-2xl bg-blue-700 hover:bg-blue-800 text-white font-bold transition duration-300 shadow-lg shadow-blue-700/25 hover:shadow-blue-700/40"
-                >
-                  Email a Case Coordinator
-                </a>
+                {/* Embedded Inquiry Form */}
+                <ContactInquiryForm />
 
               </div>
 
