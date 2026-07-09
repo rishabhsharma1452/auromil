@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Specialized Medical Procedures in India | AUROMIL",
   description: "Browse advanced medical procedures coordinated by AUROMIL, including Robotic Knee Replacement, IVF, and spinal care at accredited hospitals in India.",
   keywords: ["medical procedures India", "knee replacement", "IVF treatment India", "fertility care India", "robotic surgery India"],
+  alternates: {
+    canonical: "https://auromil.com/procedures",
+  },
   openGraph: {
     title: "Specialized Medical Procedures in India | AUROMIL",
     description: "Explore clinical treatments and procedures coordinated across leading JCI & NABH accredited hospitals in India.",

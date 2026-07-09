@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/coming-soon", "/_next/"],
+      disallow: ["/coming-soon"],
     },
     sitemap: "https://auromil.com/sitemap.xml",
   };
