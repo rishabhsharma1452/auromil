@@ -86,3 +86,42 @@ export function getMedicalWebPageSchema(name: string, description: string, url: 
     }
   };
 }
+
+export function getMedicalBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "AUROMIL",
+    "url": "https://auromil.com",
+    "logo": "https://auromil.com/auromil-logo.svg",
+    "email": "contact@auromil.com",
+    "telephone": "+919310790689",
+    "sameAs": [
+      "https://www.linkedin.com/company/auromil",
+      "https://www.instagram.com/auromilhealth"
+    ],
+    "description": "AUROMIL coordinates medical travel for international patients seeking care in India, matching them with JCI and NABH accredited hospitals.",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "New Delhi",
+      "addressRegion": "Delhi",
+      "addressCountry": "IN"
+    }
+  };
+}
+
+export function getMedicalProcedureSchema(name: string, description: string, url: string, category: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    "name": name,
+    "description": description,
+    "url": url,
+    "procedureType": {
+      "@type": "MedicalProcedureType",
+      "name": "SurgicalProcedure"
+    },
+    "category": category
+  };
+}

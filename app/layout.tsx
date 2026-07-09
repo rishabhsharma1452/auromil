@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://auromil.com"),
   title: "Auromil | Medical Travel & Care Coordination",
   description: "Auromil coordinates care matching international patients with accredited hospital networks in India. We simplify medical visa invitation letters and travel files.",
   alternates: {

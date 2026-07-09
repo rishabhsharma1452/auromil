@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { procedures } from "../../../../content/procedures";
-import JsonLd, { getBreadcrumbSchema } from "../../../../components/JsonLd";
+import JsonLd, { getBreadcrumbSchema, getMedicalWebPageSchema } from "../../../../components/JsonLd";
 
 interface TopicPageProps {
   params: Promise<{ procedure: string; topic: string }>;
@@ -42,6 +42,11 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
       url: `https://auromil.com/procedures/${proc.slug}/${topic}`,
       type: "article",
     },
+    twitter: {
+      card: "summary_large_image",
+      title: tData.metaTitle,
+      description: tData.metaDesc,
+    },
   };
 }
 
@@ -61,10 +66,15 @@ export default async function ProcedureTopicPage({ params }: TopicPageProps) {
     { name: proc.title, item: `https://auromil.com/procedures/${proc.slug}` },
     { name: tData.title, item: `https://auromil.com/procedures/${proc.slug}/${topic}` },
   ]);
+  const medicalSchema = getMedicalWebPageSchema(
+    `${proc.title}: ${tData.title}`,
+    tData.metaDesc,
+    `https://auromil.com/procedures/${proc.slug}/${topic}`
+  );
 
   return (
     <main className="min-h-screen bg-white text-slate-900 pt-32 pb-24">
-      <JsonLd schema={[breadcrumbSchema]} />
+      <JsonLd schema={[breadcrumbSchema, medicalSchema]} />
 
       <div className="max-w-4xl mx-auto px-6">
         {/* Navigation Breadcrumbs */}

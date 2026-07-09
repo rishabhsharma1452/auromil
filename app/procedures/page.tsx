@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     description: "Explore clinical treatments and procedures coordinated across leading JCI & NABH accredited hospitals in India.",
     url: "https://auromil.com/procedures",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Specialized Medical Procedures in India | AUROMIL",
+    description: "Browse advanced medical procedures coordinated by AUROMIL, including Robotic Knee Replacement, IVF, and spinal care at accredited hospitals in India.",
   }
 };
 

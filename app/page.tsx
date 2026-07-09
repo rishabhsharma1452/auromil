@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import JsonLd, { getOrganizationSchema, getWebSiteSchema } from "../components/JsonLd";
+import JsonLd, { getOrganizationSchema, getWebSiteSchema, getMedicalBusinessSchema } from "../components/JsonLd";
 import ContactInquiryForm from "../components/ContactInquiryForm";
 
 const socialLinks = [
@@ -332,10 +332,11 @@ const processSteps = [
 export default function Home() {
   const organizationSchema = getOrganizationSchema();
   const webSiteSchema = getWebSiteSchema();
+  const medicalBusinessSchema = getMedicalBusinessSchema();
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      <JsonLd schema={[organizationSchema, webSiteSchema]} />
+      <JsonLd schema={[organizationSchema, webSiteSchema, medicalBusinessSchema]} />
 
       <div
         className="fixed bottom-6 right-4 z-40 flex flex-col gap-3"
@@ -405,10 +406,13 @@ export default function Home() {
 
           <div className="relative">
             <div className="absolute inset-0 bg-blue-600/5 rounded-3xl -rotate-2 transform scale-102" />
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800"
               alt="Doctor consulting with a patient"
+              width={800}
+              height={450}
               className="relative rounded-3xl shadow-2xl object-cover w-full h-[450px]"
+              priority
             />
 
           </div>

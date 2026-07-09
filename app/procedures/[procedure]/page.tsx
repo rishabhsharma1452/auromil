@@ -7,6 +7,7 @@ import JsonLd, {
   getFAQPageSchema,
   getBreadcrumbSchema,
   getMedicalWebPageSchema,
+  getMedicalProcedureSchema,
 } from "../../../components/JsonLd";
 
 interface PageProps {
@@ -36,6 +37,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: proc.metaDesc,
       url: `https://auromil.com/procedures/${proc.slug}`,
       type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: proc.metaTitle,
+      description: proc.metaDesc,
     },
   };
 }
@@ -84,11 +90,17 @@ export default async function ProcedurePillarPage({ params }: PageProps) {
     proc.shortDesc,
     `https://auromil.com/procedures/${proc.slug}`
   );
+  const procedureSchema = getMedicalProcedureSchema(
+    proc.title,
+    proc.shortDesc,
+    `https://auromil.com/procedures/${proc.slug}`,
+    proc.category
+  );
   const faqSchema = getFAQPageSchema(proc.faqs);
 
   return (
     <main className="min-h-screen bg-white text-slate-900 pt-32 pb-24">
-      <JsonLd schema={[breadcrumbSchema, medicalSchema, faqSchema]} />
+      <JsonLd schema={[breadcrumbSchema, medicalSchema, procedureSchema, faqSchema]} />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Navigation Breadcrumbs */}
