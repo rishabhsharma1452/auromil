@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import JsonLd, { getOrganizationSchema, getWebSiteSchema, getMedicalBusinessSchema } from "../components/JsonLd";
 import ContactInquiryForm from "../components/ContactInquiryForm";
-import SocialLinksWidget from "../components/SocialLinksWidget";
 
 const procedures = [
   {
@@ -268,8 +267,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <JsonLd schema={[organizationSchema, webSiteSchema, medicalBusinessSchema]} />
-
-      <SocialLinksWidget />
 
       {/* HERO */}
 

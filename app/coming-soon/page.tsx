@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import SocialLinksWidget from "../../components/SocialLinksWidget";
 
 export default function ComingSoon() {
   return (
@@ -26,8 +25,6 @@ export default function ComingSoon() {
           </div>
         </div>
       </nav>
-
-      <SocialLinksWidget />
 
       {/* MAIN COMING SOON CONTENT */}
       <main className="flex-grow flex items-center justify-center pt-36 pb-20 px-6">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProcedureInquiryModal from "../components/ProcedureInquiryModal";
+import SocialLinksWidget from "../components/SocialLinksWidget";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -56,6 +57,7 @@ export default function RootLayout({
         <div className="flex-grow">{children}</div>
         <Footer />
         <ProcedureInquiryModal />
+        <SocialLinksWidget />
       </body>
     </html>
   );
