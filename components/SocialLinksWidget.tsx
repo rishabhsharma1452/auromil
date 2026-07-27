@@ -120,7 +120,7 @@ export default function SocialLinksWidget() {
     >
       {/* Social links column */}
       <div
-        className={`flex flex-col gap-3 transition-all duration-300 ${
+        className={`flex flex-col items-end gap-3 transition-all duration-300 ${
           isOpen
             ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
             : "opacity-0 translate-y-4 scale-75 pointer-events-none"
@@ -139,19 +139,23 @@ export default function SocialLinksWidget() {
             >
               {social.label}
             </span>
-            <a
-              href={social.href}
-              aria-label={`Auromil on ${social.label}`}
-              title={social.label}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 40}ms` : "0ms",
-              }}
-              className={`flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg shadow-slate-900/10 transition-all duration-300 hover:-translate-y-0.5 ${social.colorClass} focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2`}
-            >
-              {social.icon}
-            </a>
+            
+            {/* Fixed-width centered wrapper for icons to align them vertically */}
+            <div className="flex w-12 justify-center">
+              <a
+                href={social.href}
+                aria-label={`Auromil on ${social.label}`}
+                title={social.label}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 40}ms` : "0ms",
+                }}
+                className={`flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg shadow-slate-900/10 transition-all duration-300 hover:-translate-y-0.5 ${social.colorClass} focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2`}
+              >
+                {social.icon}
+              </a>
+            </div>
           </div>
         ))}
       </div>
