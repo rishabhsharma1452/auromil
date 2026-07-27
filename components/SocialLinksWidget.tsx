@@ -115,21 +115,28 @@ export default function SocialLinksWidget() {
   return (
     <div
       ref={widgetRef}
-      className="fixed bottom-6 right-4 z-40 flex items-center gap-3"
+      className="fixed bottom-6 right-4 z-40 flex flex-col items-end gap-3"
       aria-label="Auromil social and contact links"
     >
-      {/* Social links row (shown when open) */}
+      {/* Social links column */}
       <div
-        className={`flex items-center gap-3 transition-all duration-300 ${
+        className={`flex flex-col gap-3 transition-all duration-300 ${
           isOpen
-            ? "opacity-100 translate-x-0 scale-100 pointer-events-auto"
-            : "opacity-0 translate-x-4 scale-75 pointer-events-none absolute right-16"
+            ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+            : "opacity-0 translate-y-4 scale-75 pointer-events-none"
         }`}
       >
         {socialLinks.map((social, index) => (
-          <div key={social.label} className="relative group/icon">
-            {/* Tooltip */}
-            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-slate-900 text-white text-[10px] font-semibold px-2 py-1 rounded shadow-lg border border-white/10 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+          <div key={social.label} className="flex items-center gap-2">
+            {/* Tooltip label for each icon */}
+            <span
+              className={`bg-slate-900/90 backdrop-blur-sm text-white text-[10px] font-semibold px-2 py-1 rounded shadow border border-white/10 select-none transition-all duration-300 ${
+                isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
+              }`}
+              style={{
+                transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 40}ms` : "0ms",
+              }}
+            >
               {social.label}
             </span>
             <a
@@ -139,7 +146,7 @@ export default function SocialLinksWidget() {
               target="_blank"
               rel="noreferrer"
               style={{
-                transitionDelay: isOpen ? `${index * 40}ms` : "0ms",
+                transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 40}ms` : "0ms",
               }}
               className={`flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg shadow-slate-900/10 transition-all duration-300 hover:-translate-y-0.5 ${social.colorClass} focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2`}
             >
@@ -149,25 +156,29 @@ export default function SocialLinksWidget() {
         ))}
       </div>
 
-      {/* Trigger Button with Connect Text Pill */}
+      {/* Trigger Button with Text Pill */}
       <div className="flex items-center gap-2 group/widget cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        {/* Connect Pill - only visible when closed */}
+        {/* Persistent Pill that changes state */}
         <span
           className={`select-none bg-slate-900 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-lg border border-slate-800 transition-all duration-300 flex items-center gap-1.5 ${
-            isOpen
-              ? "opacity-0 scale-75 pointer-events-none translate-x-4 absolute right-16"
-              : "opacity-100 translate-x-0 scale-100"
+            isOpen ? "bg-slate-800 border-slate-700" : "hover:bg-slate-800 hover:border-slate-700"
           }`}
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-          <span>Connect</span>
+          {isOpen ? (
+            <span>Close</span>
+          ) : (
+            <>
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>Connect</span>
+            </>
+          )}
         </span>
 
         {/* Floating Action Button */}
         <button
           aria-expanded={isOpen}
           aria-label="Toggle contact menu"
-          className={`flex h-12 w-12 items-center justify-center rounded-full text-white shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 z-10 ${
+          className={`flex h-12 w-12 items-center justify-center rounded-full text-white shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 ${
             isOpen
               ? "bg-slate-800 rotate-90"
               : "bg-blue-700 hover:bg-blue-800 hover:scale-105"
