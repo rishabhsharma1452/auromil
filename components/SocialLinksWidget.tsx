@@ -127,16 +127,17 @@ export default function SocialLinksWidget() {
         }`}
       >
         {socialLinks.map((social, index) => (
-          <div key={social.label} className="flex items-center gap-2">
+          <div
+            key={social.label}
+            className={`flex items-center gap-2 transition-all duration-300 ${
+              isOpen ? "opacity-100 translate-x-0 scale-100" : "opacity-0 translate-x-2 scale-75 pointer-events-none"
+            }`}
+            style={{
+              transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 45}ms` : "0ms",
+            }}
+          >
             {/* Tooltip label for each icon */}
-            <span
-              className={`bg-slate-900/90 backdrop-blur-sm text-white text-[10px] font-semibold px-2 py-1 rounded shadow border border-white/10 select-none transition-all duration-300 ${
-                isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
-              }`}
-              style={{
-                transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 40}ms` : "0ms",
-              }}
-            >
+            <span className="bg-slate-900/90 backdrop-blur-sm text-white text-[10px] font-semibold px-2 py-1 rounded shadow border border-white/10 select-none">
               {social.label}
             </span>
             
@@ -148,10 +149,7 @@ export default function SocialLinksWidget() {
                 title={social.label}
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  transitionDelay: isOpen ? `${(socialLinks.length - 1 - index) * 40}ms` : "0ms",
-                }}
-                className={`flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg shadow-slate-900/10 transition-all duration-300 hover:-translate-y-0.5 ${social.colorClass} focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2`}
+                className={`flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-lg shadow-slate-900/10 transition-all duration-100 ease-out hover:-translate-y-0.5 ${social.colorClass} focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2`}
               >
                 {social.icon}
               </a>
