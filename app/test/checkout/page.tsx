@@ -71,32 +71,29 @@ export default function CheckoutPage() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
     
-    // Simulate API delay
-    setTimeout(() => {
-      try {
-        const order = placeOrder({
-          customerName: name,
-          customerPhone: phone,
-          deliveryAddress: address,
-          landmark,
-          pinCode,
-          paymentMethod,
-          specialInstructions: deliveryInstructions,
-        });
-        
-        // Redirect to confirmation screen
-        router.push(`/test/order-confirmation/${order.id}`);
-      } catch (err) {
-        console.error(err);
-        setIsSubmitting(false);
-      }
-    }, 1200);
+    try {
+      const order = await placeOrder({
+        customerName: name,
+        customerPhone: phone,
+        deliveryAddress: address,
+        landmark,
+        pinCode,
+        paymentMethod,
+        specialInstructions: deliveryInstructions,
+      });
+      
+      // Redirect to confirmation screen
+      router.push(`/test/order-confirmation/${order.id}`);
+    } catch (err) {
+      console.error(err);
+      setIsSubmitting(false);
+    }
   };
 
   // If cart is empty, show empty state

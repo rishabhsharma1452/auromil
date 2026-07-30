@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { Restaurant, Category, Item, Order, OrderItem } from "../types";
 import { mockRestaurant, mockCategories, mockMenuItems, mockOrders } from "../data/mockData";
 
@@ -27,18 +27,18 @@ interface StoreContextProps {
     pinCode: string;
     paymentMethod: "COD" | "UPI" | "CARD";
     specialInstructions?: string;
-  }) => Order;
-  updateOrderStatus: (orderId: string, status: Order["deliveryStatus"]) => void;
+  }) => Promise<Order>;
+  updateOrderStatus: (orderId: string, status: Order["deliveryStatus"]) => Promise<void>;
   
   // Menu/Category CRUD Actions
-  addMenuItem: (item: Omit<Item, "id" | "popularityCount">) => void;
-  updateMenuItem: (item: Item) => void;
-  deleteMenuItem: (itemId: string) => void;
-  addCategory: (category: Omit<Category, "id">) => void;
+  addMenuItem: (item: Omit<Item, "id" | "popularityCount">) => Promise<void>;
+  updateMenuItem: (item: Item) => Promise<void>;
+  deleteMenuItem: (itemId: string) => Promise<void>;
+  addCategory: (category: Omit<Category, "id">) => Promise<void>;
   
   // Audio Alert
   playNewOrderSound: () => void;
-  resetToDefaults: () => void;
+  resetToDefaults: () => Promise<void>;
 }
 
 const StoreContext = createContext<StoreContextProps | undefined>(undefined);
@@ -65,7 +65,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   // Play digital double-tone bell chime using Web Audio API (completely synthetic, no file assets needed)
-  const playNewOrderSound = () => {
+  const playNewOrderSound = useCallback(() => {
     try {
       const AudioContextClass = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
@@ -100,46 +100,53 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } catch (e) {
       console.warn("Audio Context blocked or failed:", e);
     }
-  };
+  }, []);
 
-  // Listen to storage events to sync across tabs (simulates real-time database)
-  useEffect(() => {
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "momo_orders" && e.newValue) {
-        const newOrders = JSON.parse(e.newValue) as Order[];
-        // If a new order is added compared to current state, play a notification chime!
-        if (newOrders.length > orders.length) {
-          playNewOrderSound();
+  // Server Database synchronization (polls every 3 seconds for multi-device sync)
+  const syncWithServer = useCallback(async (playChimeOnNew = true) => {
+    try {
+      const res = await fetch("/test/api");
+      if (!res.ok) return;
+      const data = await res.json();
+
+      setCategories(data.categories);
+      setMenuItems(data.menuItems);
+
+      setOrders((prevOrders) => {
+        if (playChimeOnNew && data.orders.length > prevOrders.length) {
+          const newOrders = data.orders.filter(
+            (o: Order) => !prevOrders.some((po) => po.id === o.id)
+          );
+          if (newOrders.length > 0) {
+            const hasNewPending = newOrders.some((o: Order) => o.deliveryStatus === "PENDING");
+            if (hasNewPending) {
+              playNewOrderSound();
+            }
+          }
         }
-        setOrders(newOrders);
-      }
-      if (e.key === "momo_menuItems" && e.newValue) {
-        setMenuItems(JSON.parse(e.newValue));
-      }
-      if (e.key === "momo_categories" && e.newValue) {
-        setCategories(JSON.parse(e.newValue));
-      }
+        return data.orders;
+      });
+    } catch (err) {
+      console.error("Failed to sync with server:", err);
+    }
+  }, [playNewOrderSound]);
+
+  useEffect(() => {
+    // Initial fetch wrapped to avoid synchronous setState inside mount effect
+    const handle = requestAnimationFrame(() => {
+      syncWithServer(false);
+    });
+
+    // Setup polling interval
+    const interval = setInterval(() => {
+      syncWithServer(true);
+    }, 3000);
+
+    return () => {
+      cancelAnimationFrame(handle);
+      clearInterval(interval);
     };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, [orders]);
-
-  // Save states helper
-  const saveCategories = (updated: Category[]) => {
-    setCategories(updated);
-    localStorage.setItem("momo_categories", JSON.stringify(updated));
-  };
-
-  const saveMenuItems = (updated: Item[]) => {
-    setMenuItems(updated);
-    localStorage.setItem("momo_menuItems", JSON.stringify(updated));
-  };
-
-  const saveOrders = (updated: Order[]) => {
-    setOrders(updated);
-    localStorage.setItem("momo_orders", JSON.stringify(updated));
-  };
+  }, [syncWithServer]);
 
   // Cart Operations
   const addToCart = (item: Item, quantity: number = 1, notes?: string) => {
@@ -181,7 +188,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   // Order Operations
-  const placeOrder = (orderData: {
+  const placeOrder = async (orderData: {
     customerName: string;
     customerPhone: string;
     deliveryAddress: string;
@@ -204,7 +211,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const newOrderId = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
     const timeOrdered = new Date().toISOString();
     
-    // Calculate expected delivery time (30 mins from now)
     const deliveryTime = new Date();
     deliveryTime.setMinutes(deliveryTime.getMinutes() + 30);
     const expectedDeliveryTime = deliveryTime.toISOString();
@@ -230,67 +236,107 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       expectedDeliveryTime,
     };
 
-    const updatedOrders = [newOrder, ...orders];
-    saveOrders(updatedOrders);
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "place_order", order: newOrder }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to save order to server:", err);
+    }
+
     clearCart();
-    
-    // Explicitly play chime in this tab too (local notification)
-    playNewOrderSound();
-    
     return newOrder;
   };
 
-  const updateOrderStatus = (orderId: string, status: Order["deliveryStatus"]) => {
-    const updated = orders.map((o) => {
-      if (o.id === orderId) {
-        let paymentStatus = o.paymentStatus;
-        if (status === "DELIVERED" && o.paymentMethod === "COD") {
-          paymentStatus = "PAID";
-        }
-        return { ...o, deliveryStatus: status, paymentStatus };
-      }
-      return o;
-    });
-    saveOrders(updated);
+  const updateOrderStatus = async (orderId: string, status: Order["deliveryStatus"]) => {
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "update_status", orderId, status }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to update status on server:", err);
+    }
   };
 
   // Menu CRUD Operations
-  const addMenuItem = (item: Omit<Item, "id" | "popularityCount">) => {
+  const addMenuItem = async (item: Omit<Item, "id" | "popularityCount">) => {
     const newItem: Item = {
       ...item,
       id: `item-${Date.now()}`,
       popularityCount: 0,
     };
-    const updated = [...menuItems, newItem];
-    saveMenuItems(updated);
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "add_item", item: newItem }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to add menu item on server:", err);
+    }
   };
 
-  const updateMenuItem = (updatedItem: Item) => {
-    const updated = menuItems.map((i) => (i.id === updatedItem.id ? updatedItem : i));
-    saveMenuItems(updated);
+  const updateMenuItem = async (updatedItem: Item) => {
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "update_item", item: updatedItem }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to update menu item on server:", err);
+    }
   };
 
-  const deleteMenuItem = (itemId: string) => {
-    const updated = menuItems.filter((i) => i.id !== itemId);
-    saveMenuItems(updated);
+  const deleteMenuItem = async (itemId: string) => {
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "delete_item", itemId }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to delete menu item on server:", err);
+    }
   };
 
-  const addCategory = (category: Omit<Category, "id">) => {
+  const addCategory = async (category: Omit<Category, "id">) => {
     const newCategory: Category = {
       ...category,
       id: `cat-${Date.now()}`,
     };
-    const updated = [...categories, newCategory];
-    saveCategories(updated);
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "add_category", category: newCategory }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to add category on server:", err);
+    }
   };
 
-  const resetToDefaults = () => {
-    localStorage.removeItem("momo_categories");
-    localStorage.removeItem("momo_menuItems");
-    localStorage.removeItem("momo_orders");
-    setCategories(mockCategories);
-    setMenuItems(mockMenuItems);
-    setOrders(mockOrders);
+  const resetToDefaults = async () => {
+    try {
+      await fetch("/test/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reset" }),
+      });
+      await syncWithServer(false);
+    } catch (err) {
+      console.error("Failed to reset store on server:", err);
+    }
   };
 
   return (
