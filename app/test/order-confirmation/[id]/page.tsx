@@ -8,7 +8,7 @@ import { Order } from "../../types";
 
 export default function OrderConfirmationPage() {
   const { id } = useParams();
-  const { orders, updateOrderStatus } = useStore();
+  const { orders, updateOrderStatus, isLoading } = useStore();
   const [isClient, setIsClient] = useState(false);
   const [countdown, setCountdown] = useState(30);
 
@@ -28,7 +28,7 @@ export default function OrderConfirmationPage() {
     };
   }, []);
 
-  if (!isClient) {
+  if (isLoading || !isClient) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>

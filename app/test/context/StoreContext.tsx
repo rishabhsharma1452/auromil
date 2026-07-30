@@ -10,6 +10,7 @@ interface StoreContextProps {
   menuItems: Item[];
   orders: Order[];
   cart: { item: Item; quantity: number; notes?: string }[];
+  isLoading: boolean;
   
   // Cart Actions
   addToCart: (item: Item, quantity?: number, notes?: string) => void;
@@ -49,20 +50,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [menuItems, setMenuItems] = useState<Item[]>(mockMenuItems);
   const [orders, setOrders] = useState<Order[]>(mockOrders);
   const [cart, setCart] = useState<{ item: Item; quantity: number; notes?: string }[]>([]);
-
-  // Load from localStorage on client side mount to avoid SSR hydration mismatch
-  useEffect(() => {
-    const handle = requestAnimationFrame(() => {
-      const storedCategories = localStorage.getItem("momo_categories");
-      const storedMenuItems = localStorage.getItem("momo_menuItems");
-      const storedOrders = localStorage.getItem("momo_orders");
-
-      if (storedCategories) setCategories(JSON.parse(storedCategories));
-      if (storedMenuItems) setMenuItems(JSON.parse(storedMenuItems));
-      if (storedOrders) setOrders(JSON.parse(storedOrders));
-    });
-    return () => cancelAnimationFrame(handle);
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Play digital double-tone bell chime using Web Audio API (completely synthetic, no file assets needed)
   const playNewOrderSound = useCallback(() => {
@@ -106,7 +94,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const syncWithServer = useCallback(async (playChimeOnNew = true) => {
     try {
       const res = await fetch("/test/api");
-      if (!res.ok) return;
+      if (!res.ok) {
+        setIsLoading(false);
+        return;
+      }
       const data = await res.json();
 
       setCategories(data.categories);
@@ -126,8 +117,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
         return data.orders;
       });
+      setIsLoading(false);
     } catch (err) {
       console.error("Failed to sync with server:", err);
+      setIsLoading(false);
     }
   }, [playNewOrderSound]);
 
@@ -360,6 +353,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         addCategory,
         playNewOrderSound,
         resetToDefaults,
+        isLoading,
       }}
     >
       {children}
