@@ -6,6 +6,8 @@ import { Order, Item } from "../types";
 
 const DB_PATH = path.join(process.cwd(), "test-db.json");
 
+export const dynamic = "force-dynamic";
+
 // Helper to initialize and retrieve the JSON database
 function getDb() {
   try {
@@ -44,7 +46,13 @@ function saveDb(data: unknown) {
 // GET handler: Returns the entire current store database
 export async function GET() {
   const db = getDb();
-  return NextResponse.json(db);
+  return NextResponse.json(db, {
+    headers: {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+    },
+  });
 }
 
 // POST handler: Performs database mutations (RPC style)

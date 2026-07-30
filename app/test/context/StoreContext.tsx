@@ -93,7 +93,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Server Database synchronization (polls every 3 seconds for multi-device sync)
   const syncWithServer = useCallback(async (playChimeOnNew = true) => {
     try {
-      const res = await fetch("/test/api");
+      const res = await fetch(`/test/api?t=${Date.now()}`);
       if (!res.ok) {
         setIsLoading(false);
         return;
