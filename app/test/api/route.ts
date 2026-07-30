@@ -5,33 +5,38 @@ import { mockCategories, mockMenuItems, mockOrders, mockRestaurant } from "../da
 import { Order, Item } from "../types";
 
 const DB_PATH = path.join(process.cwd(), "test-db.json");
-const BUCKET_ID = "Xjx1pt8d9L4sUbWYN13rsh";
-const KVDB_URL = `https://kvdb.io/${BUCKET_ID}/auromil_momo_db`;
+
+// Check if Vercel KV environment variables are injected
+const KV_URL = process.env.KV_REST_API_URL || process.env.NEXT_PUBLIC_KV_REST_API_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.NEXT_PUBLIC_KV_REST_API_TOKEN;
 
 export const dynamic = "force-dynamic";
 
-// Helper to initialize and retrieve the database (Vercel KVdb in production, local JSON file in dev)
+// Helper to initialize and retrieve the database (Vercel KV in production, local JSON file in dev)
 async function getDb() {
-  if (process.env.VERCEL) {
+  if (KV_URL && KV_TOKEN) {
     try {
-      const res = await fetch(KVDB_URL, {
-        next: { revalidate: 0 },
-        headers: { "Cache-Control": "no-cache" }
+      const res = await fetch(`${KV_URL}/get/auromil_momo_db`, {
+        headers: { Authorization: `Bearer ${KV_TOKEN}` },
+        next: { revalidate: 0 } // Disable Next.js fetch caching
       });
-      if (res.status === 404) {
-        const initial = {
-          restaurant: mockRestaurant,
-          categories: mockCategories,
-          menuItems: mockMenuItems,
-          orders: mockOrders,
-        };
-        await saveDb(initial);
-        return initial;
+      if (!res.ok) throw new Error(`Vercel KV error: ${res.statusText}`);
+      const data = await res.json();
+      if (data.result) {
+        return JSON.parse(data.result);
       }
-      if (!res.ok) throw new Error(`KVdb error: ${res.statusText}`);
-      return await res.json();
+      
+      // Initialize KV store with default database if key doesn't exist
+      const initial = {
+        restaurant: mockRestaurant,
+        categories: mockCategories,
+        menuItems: mockMenuItems,
+        orders: mockOrders,
+      };
+      await saveDb(initial);
+      return initial;
     } catch (error) {
-      console.error("Error reading from KVdb:", error);
+      console.error("Error reading from Vercel KV:", error);
       return {
         restaurant: mockRestaurant,
         categories: mockCategories,
@@ -41,6 +46,7 @@ async function getDb() {
     }
   }
 
+  // Local filesystem database (for local dev server)
   try {
     if (!fs.existsSync(DB_PATH)) {
       const initial = {
@@ -67,19 +73,21 @@ async function getDb() {
 
 // Helper to save state changes to the database
 async function saveDb(data: unknown) {
-  if (process.env.VERCEL) {
+  if (KV_URL && KV_TOKEN) {
     try {
-      const res = await fetch(KVDB_URL, {
+      const res = await fetch(`${KV_URL}/set/auromil_momo_db`, {
         method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
+        headers: {
+          Authorization: `Bearer ${KV_TOKEN}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(JSON.stringify(data)) // Redis expects stringified JSON value
       });
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`KVdb write failed: ${text}`);
+        throw new Error(`Vercel KV write failed: ${res.statusText}`);
       }
     } catch (error) {
-      console.error("Error writing to KVdb:", error);
+      console.error("Error writing to Vercel KV:", error);
     }
     return;
   }
