@@ -116,7 +116,7 @@ export default async function ProcedureTopicPage({ params }: TopicPageProps) {
         <div className="p-8 bg-slate-50 border border-slate-100 rounded-3xl space-y-6">
           <h3 className="text-lg font-bold text-slate-900">Need a comprehensive treatment estimate?</h3>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Every patient's medical records are unique. We collect cost estimates and clinical reviews from multiple accredited hospitals in India based on your records, helping you compare your options objectively.
+            Every patient&apos;s medical records are unique. We collect cost estimates and clinical reviews from multiple accredited hospitals in India based on your records, helping you compare your options objectively.
           </p>
           <div className="flex flex-wrap gap-4 items-center">
             <Link

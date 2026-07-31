@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { procedures } from "../content/procedures";
 import { submitInquiryAction } from "../app/actions/inquiry";
@@ -10,10 +10,11 @@ function ModalContent() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const inquirySlug = searchParams.get("inquire") || searchParams.get("inquiry");
+  const inquirySlug = searchParams.get("inquire") || searchParams.get("inquiry") || "";
+  const currentProcedure = procedures.find((p) => p.slug === inquirySlug);
+  const procedureTitle = currentProcedure ? currentProcedure.title : inquirySlug;
   
-  const [isOpen, setIsOpen] = useState(false);
-  const [procedureTitle, setProcedureTitle] = useState("");
+  const isOpen = !!inquirySlug;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,8 +30,7 @@ function ModalContent() {
   const firstInputRef = useRef<HTMLInputElement>(null);
 
   // Close helper
-  const handleClose = () => {
-    setIsOpen(false);
+  const handleClose = useCallback(() => {
     setIsSubmitted(false);
     // Remove search param from URL
     const params = new URLSearchParams(searchParams.toString());
@@ -38,21 +38,17 @@ function ModalContent() {
     params.delete("inquiry");
     const query = params.toString() ? `?${params.toString()}` : "";
     router.push(`${pathname}${query}`, { scroll: false });
-  };
+  }, [searchParams, router, pathname]);
 
   useEffect(() => {
-    if (inquirySlug) {
-      const match = procedures.find((p) => p.slug === inquirySlug);
-      setProcedureTitle(match ? match.title : inquirySlug);
-      setIsOpen(true);
+    if (isOpen) {
       // Autofocus first input on open
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         firstInputRef.current?.focus();
       }, 50);
-    } else {
-      setIsOpen(false);
+      return () => clearTimeout(timer);
     }
-  }, [inquirySlug]);
+  }, [isOpen]);
 
   // Trap focus and handle escape key
   useEffect(() => {
@@ -87,7 +83,7 @@ function ModalContent() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -77,11 +77,14 @@ Auromil Care Coordination Portal
       success: true,
       message: "Your inquiry has been successfully received by our care coordinators.",
     };
-  } catch (error: any) {
-    console.error("Inquiry submission error on server:", error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error("Inquiry submission error on server:", err);
     return {
       success: false,
-      error: error.message || "An unexpected error occurred on the server. Please try again or contact us directly.",
+      error: err.message || "An unexpected error occurred on the server. Please try again or contact us directly.",
     };
   }
 }
+
+

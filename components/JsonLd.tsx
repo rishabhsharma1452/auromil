@@ -1,5 +1,5 @@
 interface JsonLdProps {
-  schema: Record<string, any> | Record<string, any>[];
+  schema: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export default function JsonLd({ schema }: JsonLdProps) {
