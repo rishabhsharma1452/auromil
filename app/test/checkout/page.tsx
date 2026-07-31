@@ -26,6 +26,7 @@ export default function CheckoutPage() {
 
   // Errors state
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [orderError, setOrderError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -76,6 +77,7 @@ export default function CheckoutPage() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setOrderError(null);
     
     try {
       const order = await placeOrder({
@@ -88,10 +90,12 @@ export default function CheckoutPage() {
         specialInstructions: deliveryInstructions,
       });
       
-      // Redirect to confirmation screen
+      // Only navigate if we got a confirmed order back
       router.push(`/test/order-confirmation/${order.id}`);
     } catch (err) {
-      console.error(err);
+      const message = err instanceof Error ? err.message : "Failed to place order. Please try again.";
+      console.error("Order placement error:", message);
+      setOrderError(message);
       setIsSubmitting(false);
     }
   };
@@ -137,6 +141,18 @@ export default function CheckoutPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Order Error Banner */}
+          {orderError && (
+            <div className="lg:col-span-3 bg-red-50 border border-red-200 rounded-2xl p-4 flex items-start gap-3">
+              <span className="text-red-500 text-lg flex-shrink-0">⚠️</span>
+              <div>
+                <h4 className="font-bold text-red-800 text-sm">Order Failed</h4>
+                <p className="text-red-600 text-xs mt-0.5">{orderError}</p>
+                <p className="text-red-400 text-[10px] mt-1">Please check your details and try again. If the problem persists, contact support.</p>
+              </div>
+            </div>
+          )}
+
           {/* Customer Details Form (ColSpan 2) */}
           <div className="lg:col-span-2 space-y-6">
             

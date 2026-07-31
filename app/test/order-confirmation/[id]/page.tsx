@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useStore } from "../../context/StoreContext";
 import Link from "next/link";
@@ -11,6 +11,9 @@ export default function OrderConfirmationPage() {
   const { orders, updateOrderStatus, isLoading } = useStore();
   const [isClient, setIsClient] = useState(false);
   const [countdown, setCountdown] = useState(30);
+  // Tracks whether the grace period (5s) has expired without finding the order
+  const [gracePeriodDone, setGracePeriodDone] = useState(false);
+  const gracePeriodRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handle = requestAnimationFrame(() => {
@@ -22,21 +25,34 @@ export default function OrderConfirmationPage() {
       setCountdown((prev) => (prev > 1 ? prev - 1 : 30));
     }, 60000); // decrement every minute
     
+    // Grace period: after 5 seconds, stop showing the loading spinner
+    // and display "Order not found" if the order still hasn't appeared.
+    // This is a one-time timer, not dependent on order state.
+    gracePeriodRef.current = setTimeout(() => {
+      setGracePeriodDone(true);
+    }, 5000);
+
     return () => {
       cancelAnimationFrame(handle);
       clearInterval(timer);
+      if (gracePeriodRef.current) clearTimeout(gracePeriodRef.current);
     };
   }, []);
 
-  if (isLoading || !isClient) {
+  const order = orders.find((o) => o.id === id);
+
+  // Show loading if: initial load, client not ready, or grace period active & order missing
+  if (isLoading || !isClient || (!order && !gracePeriodDone)) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
+        <div className="text-center space-y-3">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500 mx-auto"></div>
+          <p className="text-sm text-slate-500 font-medium">Loading your order...</p>
+          <p className="text-[10px] text-slate-400 font-mono">{id}</p>
+        </div>
       </div>
     );
   }
-
-  const order = orders.find((o) => o.id === id);
 
   if (!order) {
     return (
@@ -45,8 +61,16 @@ export default function OrderConfirmationPage() {
           <span className="text-5xl">⚠️</span>
           <h2 className="text-2xl font-black tracking-tight text-slate-800">Order Not Found</h2>
           <p className="text-slate-500 text-xs">
-            We couldn&apos;t find an order with the ID: <b className="font-mono">{id}</b>. Please check your URL or place a new order.
+            We couldn&apos;t find an order with the ID: <b className="font-mono">{id}</b>.
           </p>
+          <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-left space-y-1">
+            <p className="text-[10px] font-bold text-slate-400 uppercase">Possible reasons:</p>
+            <ul className="text-[11px] text-slate-500 list-disc list-inside space-y-0.5">
+              <li>The order failed to save to the database</li>
+              <li>The order ID in the URL is incorrect</li>
+              <li>The database connection is temporarily unavailable</li>
+            </ul>
+          </div>
           <Link
             href="/test"
             className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-center rounded-xl transition block shadow text-sm cursor-pointer"

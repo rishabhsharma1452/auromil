@@ -180,6 +180,13 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return { subtotal, deliveryCharge, gstAmount, grandTotal };
   };
 
+  // Generate a collision-resistant order ID using timestamp + random suffix
+  const generateOrderId = () => {
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return `ORD-${timestamp}-${random}`;
+  };
+
   // Order Operations
   const placeOrder = async (orderData: {
     customerName: string;
@@ -201,7 +208,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       isVeg: c.item.isVeg,
     }));
 
-    const newOrderId = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newOrderId = generateOrderId();
     const timeOrdered = new Date().toISOString();
     
     const deliveryTime = new Date();
@@ -229,32 +236,45 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       expectedDeliveryTime,
     };
 
-    try {
-      await fetch("/test/api", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "place_order", order: newOrder }),
-      });
-      await syncWithServer(false);
-    } catch (err) {
-      console.error("Failed to save order to server:", err);
+    // Send to API and verify the response confirms persistence
+    const res = await fetch("/test/api", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "place_order", order: newOrder }),
+    });
+
+    const responseData = await res.json();
+
+    if (!res.ok || !responseData.success) {
+      const errorMsg = responseData.error || "Unknown server error";
+      console.error("Order placement failed:", errorMsg);
+      throw new Error(errorMsg);
     }
 
+    // Use the confirmed order from the database (or our local copy as fallback)
+    const confirmedOrder: Order = responseData.order || newOrder;
+
+    // Optimistically add the order to local state so the confirmation page
+    // can find it immediately without waiting for the next sync cycle
+    setOrders((prev) => [confirmedOrder, ...prev]);
+
     clearCart();
-    return newOrder;
+    return confirmedOrder;
   };
 
   const updateOrderStatus = async (orderId: string, status: Order["deliveryStatus"]) => {
-    try {
-      await fetch("/test/api", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "update_status", orderId, status }),
-      });
-      await syncWithServer(false);
-    } catch (err) {
-      console.error("Failed to update status on server:", err);
+    const res = await fetch("/test/api", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "update_status", orderId, status }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({ error: "Network error" }));
+      console.error("Failed to update order status:", data.error);
     }
+
+    await syncWithServer(false);
   };
 
   // Menu CRUD Operations
