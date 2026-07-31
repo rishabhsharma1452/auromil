@@ -80,18 +80,116 @@ export default function AdminDashboard() {
   const [itemPopular, setItemPopular] = useState(false);
   const [itemRecommended, setItemRecommended] = useState(false);
 
+  // Admin authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     const handle = requestAnimationFrame(() => {
       setIsClient(true);
+      if (typeof window !== "undefined") {
+        const auth = sessionStorage.getItem("admin_authenticated");
+        if (auth === "true") {
+          setIsAuthenticated(true);
+        }
+      }
     });
     return () => cancelAnimationFrame(handle);
   }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordInput === "momo123456") {
+      setIsAuthenticated(true);
+      setPasswordError(false);
+      sessionStorage.setItem("admin_authenticated", "true");
+    } else {
+      setPasswordError(true);
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem("admin_authenticated");
+    setPasswordInput("");
+  };
 
   if (!isClient) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl space-y-6">
+          <div className="text-center space-y-2">
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/20 text-3xl mb-2">
+              🔐
+            </div>
+            <h1 className="text-2xl font-black tracking-tight text-white">Momo Junction Admin</h1>
+            <p className="text-xs text-slate-400">
+              Enter the master password to access store operations & management dashboard.
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold text-slate-300">Master Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  value={passwordInput}
+                  onChange={(e) => {
+                    setPasswordInput(e.target.value);
+                    if (passwordError) setPasswordError(false);
+                  }}
+                  autoFocus
+                  className={`w-full px-4 py-3 bg-slate-950 border rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 ${
+                    passwordError
+                      ? "border-red-500 focus:ring-red-500/50"
+                      : "border-slate-800 focus:ring-amber-500/50"
+                  }`}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-200 cursor-pointer"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+              {passwordError && (
+                <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
+                  <span>⚠️</span> Incorrect password. Please try again.
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-center rounded-xl transition block shadow-lg text-sm cursor-pointer"
+            >
+              Unlock Dashboard →
+            </button>
+          </form>
+
+          <div className="text-center pt-2">
+            <Link
+              href="/test"
+              className="text-xs text-slate-500 hover:text-slate-400 transition"
+            >
+              ← Back to Customer App
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -332,6 +430,12 @@ export default function AdminDashboard() {
             >
               🌐 Open Customer App
             </Link>
+            <button
+              onClick={handleLogout}
+              className="px-3.5 py-2 text-xs font-bold rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition flex items-center gap-1.5 cursor-pointer"
+            >
+              🔒 Logout
+            </button>
           </div>
         </header>
 
