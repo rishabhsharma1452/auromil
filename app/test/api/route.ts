@@ -7,6 +7,10 @@ export const dynamic = "force-dynamic";
 // GET handler: Returns the entire current store database from Supabase
 export async function GET() {
   try {
+    if (!supabase) {
+      throw new Error("Supabase is not configured. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to environment variables.");
+    }
+
     // 1. Fetch categories sorted by sortOrder
     const { data: categories, error: catError } = await supabase
       .from("categories")
@@ -52,6 +56,10 @@ export async function GET() {
 // POST handler: Performs database mutations (RPC style) on Supabase
 export async function POST(req: NextRequest) {
   try {
+    if (!supabase) {
+      throw new Error("Supabase is not configured. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to environment variables.");
+    }
+
     const body = await req.json();
     const { action } = body;
 
