@@ -29,34 +29,51 @@ export default function AdminDashboard() {
   const [toast, setToast] = useState<{ id: string; message: string } | null>(null);
   const [orderLength, setOrderLength] = useState(orders.length);
 
+  // Trigger notification when a new order arrives
   useEffect(() => {
     if (orders.length > orderLength) {
       const newOrder = orders[0]; // newest is first in state
-      const handle = requestAnimationFrame(() => {
+      const timer = setTimeout(() => {
         setToast({
           id: newOrder.id,
           message: `New order ${newOrder.id} received from ${newOrder.customerName} (₹${newOrder.grandTotal})!`,
         });
         setOrderLength(orders.length);
-      });
+      }, 0);
       playNewOrderSound();
-
-      // Clear toast after 5s
-      const timer = setTimeout(() => {
-        requestAnimationFrame(() => setToast(null));
-      }, 5000);
-      
-      return () => {
-        cancelAnimationFrame(handle);
-        clearTimeout(timer);
-      };
+      return () => clearTimeout(timer);
     } else if (orders.length < orderLength) {
-      const handle = requestAnimationFrame(() => {
+      const timer = setTimeout(() => {
         setOrderLength(orders.length);
-      });
-      return () => cancelAnimationFrame(handle);
+      }, 0);
+      return () => clearTimeout(timer);
     }
-  }, [orders, orderLength, playNewOrderSound]);
+  }, [orders.length, orderLength, orders, playNewOrderSound]);
+
+  // Auto-dismiss toast 5 seconds after it appears (unaffected by 3s polling cycles)
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => {
+      setToast(null);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [toast]);
+
+  // Immediately dismiss toast if the order is marked completed/delivered/cancelled
+  useEffect(() => {
+    if (toast) {
+      const targetOrder = orders.find((o) => o.id === toast.id);
+      if (
+        targetOrder &&
+        (targetOrder.deliveryStatus === "DELIVERED" ||
+          targetOrder.deliveryStatus === "CANCELLED" ||
+          targetOrder.deliveryStatus === "REJECTED")
+      ) {
+        const timer = setTimeout(() => setToast(null), 0);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [orders, toast]);
 
   // Order Management Search & Filters
   const [orderSearch, setOrderSearch] = useState("");
@@ -388,19 +405,28 @@ export default function AdminDashboard() {
         {toast && (
           <div className="fixed top-6 right-6 z-50 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 p-4 rounded-2xl shadow-2xl border border-amber-400 flex items-center gap-3 animate-bounce">
             <span className="text-2xl">🔔</span>
-            <div>
+            <div className="pr-2">
               <h4 className="font-black text-sm text-slate-950">New Order Placed!</h4>
               <p className="text-xs font-semibold text-slate-900/90">{toast.message}</p>
             </div>
-            <button
-              onClick={() => {
-                setActiveTab("orders");
-                setToast(null);
-              }}
-              className="px-2.5 py-1 bg-slate-950 text-amber-500 text-[10px] font-bold rounded-lg shadow cursor-pointer hover:bg-slate-900"
-            >
-              View
-            </button>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => {
+                  setActiveTab("orders");
+                  setToast(null);
+                }}
+                className="px-2.5 py-1 bg-slate-950 text-amber-500 text-[10px] font-bold rounded-lg shadow cursor-pointer hover:bg-slate-900"
+              >
+                View
+              </button>
+              <button
+                onClick={() => setToast(null)}
+                className="p-1 text-slate-950/70 hover:text-slate-950 font-bold text-sm cursor-pointer"
+                title="Dismiss"
+              >
+                ✕
+              </button>
+            </div>
           </div>
         )}
 
